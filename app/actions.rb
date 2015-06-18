@@ -1,3 +1,12 @@
+helpers do
+  def current_user
+    @current_user = User.find_by(token: session[:token])if session[:token] 
+  end
+end
+
+before do
+  redirect '/login' if !@current_user
+end
 
 # Homepage (Root path)
 
@@ -29,7 +38,7 @@ get '/callback' do
   client = Octokit::Client.new(:access_token => session[:access_token])
 
 @user = User.create(
-    username: client.user.login,
+    username: client.user.loginx,
     token: session[:access_token],
     avatar_url: client.user.avatar_url,
     location: client.user.location,
