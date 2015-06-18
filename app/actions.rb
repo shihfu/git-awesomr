@@ -7,7 +7,7 @@ end
 
 get '/login' do
   client_id = 'ec929278fb87047f1280'
-  redirect "https://github.com/login/oauth/authorize?scope=user:philemonlloyds&client_id=#{client_id}"
+  redirect "https://github.com/login/oauth/authorize?scope=user&client_id=#{client_id}"
 end
 
 get '/callback' do
@@ -28,8 +28,8 @@ get '/callback' do
   session[:access_token] = JSON.parse(result)['access_token']
   client = Octokit::Client.new(:access_token => session[:access_token])
 
-@user = User.new(
-    username: client.user,
+@user = User.create(
+    username: client.user.login,
     token: session[:access_token],
     avatar_url: client.user.avatar_url,
     location: client.user.location,
