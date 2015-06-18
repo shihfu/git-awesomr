@@ -10,6 +10,7 @@ gem 'sinatra-activerecord'
 
 gem 'puma'
 gem 'tux'
+gem 'pg'
 gem 'rest-client', '~> 1.8.0'
 gem "octokit", "~> 3.0"
 gem 'pg'
@@ -17,5 +18,4 @@ gem 'pg'
 group :development, :test do
   gem 'pry'
   gem 'shotgun'
-
 end

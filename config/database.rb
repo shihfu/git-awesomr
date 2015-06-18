@@ -8,21 +8,21 @@ require 'active_record'
 #     ActiveRecord::Base.logger = Logger.new(STDOUT)
 #   end
 
-  # set :database, {
-  #   adapter: "sqlite3",
-  #   database: "db/db.sqlite3"
-  # }
+#   set :database, {
+#     adapter: "sqlite3",
+#     database: "db/db.sqlite3"
+#   }
 
-# Output messages from Active Record to standard out
+#Output messages from Active Record to standard out
 ActiveRecord::Base.logger = Logger.new(STDOUT)
 
 puts 'Establishing connection to database ...'
 ActiveRecord::Base.establish_connection(
   adapter: 'postgresql',
-  database: 'gitclout',
-  username: 'development',
-  password: 'development',
-  host: 'localhost',
+  database: 'da74eg7n84tr6v',
+  username: 'anbqllxwalczao',
+  password: '1EmrQS2BaTaq7uDDoRxDPJy10M',
+  host: 'ec2-54-83-36-90.compute-1.amazonaws.com',
   port: 5432,
   pool: 5,
   encoding: 'unicode',
