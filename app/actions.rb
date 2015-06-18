@@ -28,7 +28,7 @@ get '/callback' do
   session[:access_token] = JSON.parse(result)['access_token']
   client = Octokit::Client.new(:access_token => session[:access_token])
 
-@user = User.new(
+@user = User.create(
     username: client.user,
     token: session[:access_token],
     avatar_url: client.user.avatar_url,
@@ -38,6 +38,7 @@ get '/callback' do
     public_repos: client.user.public_repos,
     public_gists: client.user.public_gists,
     start_date: client.user.created_at)
+
   redirect '/'
 end
 
