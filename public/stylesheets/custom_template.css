@@ -1,0 +1,34 @@
+/* Move down content because we have a fixed navbar that is 50px tall */
+body {
+  padding-top: 50px;
+  padding-bottom: 20px;
+}
+
+
+html,
+body {
+  height: 100%;
+  /*background-color: #333;*/
+  /*background: url('../images/a-tile-periodic-islamic-pattern-01.png');*/
+  /*background: url('../images/dark-square.gif');*/
+  /*background: url('../images/bg_dark_sm.jpg');*/
+  background: url('../images/attachments-bg-0dcf1ce34690ac81c4fb0cbc36365bd3.png');
+  /*background-size: 1409px 798px;*/
+  /*background-size: 128px 128px;*/
+  /*background-size: 240px 140px;*/
+  background-size: 40px 40px;
+  background-repeat: repeat;
+}
+body {
+  color: #fff;
+  /*text-align: center;*/
+  text-shadow: 0 1px 3px rgba(0,0,0,.5);
+}
+
+
+.btn-success {
+  color: #fff;
+  /*background-color: #A0D468;*/
+  background-color: #8CC152;
+  border-color: #A0D468;
+}
