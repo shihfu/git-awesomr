@@ -25,10 +25,23 @@ body {
   text-shadow: 0 1px 3px rgba(0,0,0,.5);
 }
 
-
 .btn-success {
   color: #fff;
   /*background-color: #A0D468;*/
-  background-color: #8CC152;
-  border-color: #A0D468;
+  /*background-color: #8CC152;*/
+  background-color: #F6bb42;
+  border-color: #FFCE54;
+  /*border-color: #A0D468;*/
+}
+
+.img-rounded-bg {
+  border-radius: 6px;
+  height: 140px;
+  width: 140px;
+}
+
+.img-rounded-sm {
+  border-radius: 6px;
+  height: 50px;
+  width: 50px;
 }
