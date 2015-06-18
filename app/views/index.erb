@@ -3,7 +3,7 @@
   </head>
   <body>
     <p>
-      Well, hello there!
+      Well, hello there! <% if @user then %> <%= @user.username%> <% else %> Not logged In <% end %>
     </p>
     <p>
       We're going to now talk to the GitHub API. Ready?
@@ -14,4 +14,4 @@
       
     </p>
   </body>
-</html>s
+</html>
