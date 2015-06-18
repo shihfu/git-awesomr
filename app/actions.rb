@@ -1,48 +1,13 @@
 
 # Homepage (Root path)
 
-# get '/' do
-#   erb :index#, :locals => {:client_id => "ec929278fb87047f1280"}
-# end
-
-
-# def helpers
-
-  # def new_user
-  #   client = Octokit::Client.new(:access_token => session[:access_token])
-
-
-  #   user = client.user
-    
-  #   @user = User.create
-  #   (
-  #     username: user.login,
-  #     token: session[:access_token],
-  #     avatar_url: user.avatar_url,
-  #     location: user.location,
-  #     followers: user.followers,
-  #     following: user.following,
-  #     public_repos: user.public_repos,
-  #     public_gists: user.public_gists,
-  #     start_date: user.created_at
-  #   )
-
-  # end
-
-# end
-
 def current_user
   User.find(session[:user_id]) if session[:user_id]
 end
 
 
 get "/" do
-  # gh_data = get_github_data()
-  # Pass in the CLIENT_ID for the login button on the home page.
-  # @user = current_user
-  
   erb :index
-
 end
 
 get "/me" do
@@ -74,7 +39,7 @@ get '/callback' do
   data = Octokit::Client.new(access_token: token).user
 
   user = User.find_by(username: data.username)
-
+  
   unless user then
     user = User.create(
       username: data.login,
