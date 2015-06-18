@@ -10,6 +10,8 @@ gem 'sinatra-activerecord'
 
 gem 'puma'
 gem 'tux'
+gem 'rest-client', '~> 1.8.0'
+gem "octokit", "~> 3.0"
 
 group :development, :test do
   gem 'pry'

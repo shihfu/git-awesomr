@@ -10,8 +10,15 @@ require 'sinatra/contrib/all' # Requires cookies, among other things
 
 require 'pry'
 
+require 'rest-client'
+require 'json'
+require 'octokit'
+
 APP_ROOT = Pathname.new(File.expand_path('../../', __FILE__))
 APP_NAME = APP_ROOT.basename.to_s
+
+GH_BASIC_CLIENT_ID = "ec929278fb87047f1280"
+GH_BASIC_SECRET_ID = "2f6d93489179df343c2fc243d0a1aafd471d556e"
 
 # Sinatra configuration
 configure do
