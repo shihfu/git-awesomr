@@ -1,14 +1,13 @@
 
 # Homepage (Root path)
 
-
 get '/' do
   erb :index#, :locals => {:client_id => "ec929278fb87047f1280"}
 end
 
 get '/login' do
   client_id = 'ec929278fb87047f1280'
-  redirect "https://github.com/login/oauth/authorize?scope=user:email,repo&client_id=#{client_id}"
+  redirect "https://github.com/login/oauth/authorize?scope=user:philemonlloyds&client_id=#{client_id}"
 end
 
 get '/callback' do
@@ -27,14 +26,26 @@ get '/callback' do
 
   # extract the token and granted scopes
   session[:access_token] = JSON.parse(result)['access_token']
+  client = Octokit::Client.new(:access_token => session[:access_token])
+
+@user = User.new(
+    username: client.user,
+    token: session[:access_token],
+    avatar_url: client.user.avatar_url,
+    location: client.user.location,
+    followers: client.user.followers,
+    following: client.user.following,
+    public_repos: client.user.public_repos,
+    public_gists: client.user.public_gists,
+    start_date: client.user.created_at)
   redirect '/'
 end
 
 get '/userlogin' do
-client = Octokit::Client.new(:access_token => session[:access_token])
-user = client.user
-user.login
+
+
 end
+
 
 
 

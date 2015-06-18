@@ -13,6 +13,7 @@ gem 'tux'
 gem 'pg'
 gem 'rest-client', '~> 1.8.0'
 gem "octokit", "~> 3.0"
+gem 'pg'
 
 group :development, :test do
   gem 'pry'
