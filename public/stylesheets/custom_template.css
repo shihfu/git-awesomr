@@ -1,0 +1,38 @@
+/* Move down content because we have a fixed navbar that is 50px tall */
+body {
+  padding-top: 50px;
+  padding-bottom: 20px;
+}
+
+
+html,
+body {
+  height: 100%;
+  /*background-color: #333;*/
+  background: url('../images/attachments-bg-0dcf1ce34690ac81c4fb0cbc36365bd3.png');
+  background-size: 40px 40px;
+  background-repeat: repeat;
+}
+body {
+  color: #fff;
+  /*text-align: center;*/
+  text-shadow: 0 1px 3px rgba(0,0,0,.5);
+}
+
+.btn-success {
+  color: #fff;
+  background-color: #F6bb42;
+  border-color: #FFCE54;
+}
+
+.img-rounded-bg {
+  border-radius: 6px;
+  height: 140px;
+  width: 140px;
+}
+
+.img-rounded-sm {
+  border-radius: 6px;
+  height: 44px;
+  width: 44px;
+}
