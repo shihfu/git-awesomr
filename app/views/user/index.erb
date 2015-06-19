@@ -12,11 +12,17 @@
   <div class="col-md-2">
     <br>
     <a href="" class="img-container">
-      <img src="/images/jeff.jpeg" alt="..." class="img-rounded-bg">
+      <img src=<%= @user.avatar_url %> alt=<%= @user.avatar_url %> class="img-rounded-bg">
       <span class="score-bg">28</span>
     </a>
     <br>
     
+    <h4>Location: </h4>
+    <p><%= @user.location %></p>
+
+    <h4>Languages: </h4>
+    - INSERT HERE -
+
     <h4>Belongs to: </h4>
     <a href="/group"><img src="/images/lighthouse.png" alt="..." class="img-rounded-sm"></a>
   </div>
