@@ -44,7 +44,10 @@
         <div class="form-group">
           <input type="password" placeholder="Password" class="form-control">
         </div> -->
+        <% if @user then %>
+        <% else %>
         <a href="/login" class="btn btn-success">Sign in with GitHub <img src="/images/icn_join_w.png" alt="Join" height="20" width="20"></a>
+        <%end%>
       </form>
     </div><!--/.navbar-collapse -->
   </div>
