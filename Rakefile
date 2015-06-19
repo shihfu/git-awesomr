@@ -8,13 +8,18 @@ Rake::Task["db:drop"].clear
 # NOTE: Assumes SQLite3 DB
 desc "create the database"
 task "db:create" do
-  touch 'postgres'
+  touch 'sqlite3'
 end
 
 desc "drop the database"
 task "db:drop" do
-  rm_f 'postgres'
+  rm_f 'sqlite3'
 end
+
+# desc "populate the achievements table"
+# task "db:populate" do
+#   Achievement.destroy_all
+#   Achievement.create(name: "Account Open", level: 1 , url: ", criteria: )
 
 task 'db:create_migration' do
   unless ENV["NAME"]

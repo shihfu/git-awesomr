@@ -11,10 +11,26 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150618155922) do
+ActiveRecord::Schema.define(version: 20150619191929) do
 
-  # These are extensions that must be enabled in order to support this database
-  enable_extension "plpgsql"
+  create_table "achievements", force: :cascade do |t|
+    t.string   "name"
+    t.string   "level"
+    t.string   "url"
+    t.integer  "criteria"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "repos", force: :cascade do |t|
+    t.string   "name"
+    t.integer  "stars_count"
+    t.integer  "forks_count"
+    t.integer  "commits_count"
+    t.string   "language"
+    t.datetime "created_at",    null: false
+    t.datetime "updated_at",    null: false
+  end
 
   create_table "users", force: :cascade do |t|
     t.string   "username"
@@ -22,7 +38,6 @@ ActiveRecord::Schema.define(version: 20150618155922) do
     t.string   "avatar_url"
     t.string   "location"
     t.integer  "followers"
-    t.integer  "following"
     t.integer  "public_repos"
     t.integer  "public_gists"
     t.date     "start_date"

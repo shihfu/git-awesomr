@@ -6,7 +6,6 @@ class CreateUsers < ActiveRecord::Migration
       t.string :avatar_url
       t.string :location
       t.integer :followers
-      t.integer :following
       t.integer :public_repos
       t.integer :public_gists
       t.date :start_date
