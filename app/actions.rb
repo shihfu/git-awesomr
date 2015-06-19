@@ -5,6 +5,20 @@ def current_user
   User.find(session[:user_id]) if session[:user_id]
 end
 
+# helpers do
+#   def current_user
+#     binding.pry
+#     if session[:user_id]
+#       if @current_user.nil?
+#         @current_user = User.find(session[:user_id])
+#       end
+#       # Can be rewritten as
+#       # @current_user ||= User.find(session[:user_id])
+#     end
+#     @current_user
+#   end
+# end
+
 
 get "/" do
   erb :index
@@ -18,6 +32,11 @@ end
 get '/login' do
   client_id = 'ec929278fb87047f1280'
   redirect "https://github.com/login/oauth/authorize?scope=user&client_id=#{client_id}"
+end
+
+get '/user/login' do
+  @user = current_user
+  erb :login
 end
 
 
@@ -38,8 +57,8 @@ get '/callback' do
 
   data = Octokit::Client.new(access_token: token).user
 
-  user = User.find_by(username: data.username)
-  
+  user = User.find_by(username: data.login)
+
   unless user then
     user = User.create(
       username: data.login,
@@ -55,7 +74,8 @@ get '/callback' do
   end
 
   session[:user_id] = user.id
-  erb :login
+  
+  redirect '/user/login'
 end
 
 get '/logout' do
