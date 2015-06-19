@@ -4,21 +4,6 @@ def current_user
   User.find(session[:user_id]) if session[:user_id]
 end
 
-# helpers do
-#   def current_user
-#     binding.pry
-#     if session[:user_id]
-#       if @current_user.nil?
-#         @current_user = User.find(session[:user_id])
-#       end
-#       # Can be rewritten as
-#       # @current_user ||= User.find(session[:user_id])
-#     end
-#     @current_user
-#   end
-# end
-
-
 get "/" do
   erb :index
 end
@@ -73,7 +58,6 @@ get '/callback' do
   end
 
   session[:user_id] = user.id
-
   
   redirect '/user/login'
 

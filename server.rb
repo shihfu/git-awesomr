@@ -1,67 +1,90 @@
-require "sinatra"
-require "sinatra/activerecord"
-require 'rest-client'
-require 'json'
-require 'octokit'
-require 'pp' # for pretty print debugging
+require 'github_api'
+require 'pry'
+require 'ghee'
+require "octokit"
+require 'date'
 
-# Needed for preserving github auth tokens across sessions.
-enable :sessions
+token = '37da512c008ce7b7b0da524b01d7f3f0ef68937a'
 
-CLIENT_ID = ENV['GH_BASIC_CLIENT_ID']
-CLIENT_SECRET = ENV['GH_BASIC_SECRET_ID']
+data = Octokit::Client.new(access_token: '37da512c008ce7b7b0da524b01d7f3f0ef68937a')   
 
-def authenticated?
-  session[:access_token]
+user_data = data.user
+
+user = Octokit.user 'philemonlloyds'
+
+# puts user.name
+
+# puts user.fields
+
+# puts user[:company]
+
+# puts user.rels[:gists].href
+
+# octokit.client.users
+# def user(user=nil, options = {})
+#   get User.path(user), options
+# end
+
+# # octokit.client.repositories
+# def repositories(user=nil, options = {})
+#   paginate "#{User.path user}/repos", options
+# end
+
+  # def collaborators(repo, options = {})
+  #       paginate "#{Repository.path repo}/collaborators", options
+  #     end
+name = 'someonetookit'
+# GET /users/:username/repos
+user_repos = Octokit.repositories name
+
+# user_coll = Octokit.collaborators('someonetookit/Git_Achievement')  # need authentication
+# puts user_repos[0][:stargazers_count]
+# puts total_star_gazers
+#stars--for--repos  
+
+# GET /repos/:owner/:repo/contributors
+
+# contributors = Octokit.
+
+# GET /repos/:owner/:repo/stats/commit_activity - commit activity   
+
+
+stargazers_count = 0
+forks_count_count = 0
+recent_repos =[]
+user_languages_with_bytes = []
+user_languages =[]
+
+user_repos.each do |i|
+  stargazers_count += i[:stargazers_count]
 end
- 
-def authenticate!
-  erb :"login", :locals => {:client_id => CLIENT_ID}
+
+user_repos.each do |i|
+  forks_count_count += i [:forks_count]
 end
 
-def get_github_data()
-  if !authenticated?
-    authenticate!
-  else
-    client = Octokit::Client.new :access_token => session[:access_token]
-    
-    # Create a hash for collecting our example data.
-    data = Hash.new
-    
-    # Get various types of data using Octokit.rb
-    
-    # User Data: 
-    # User data is available via client.user. As long as you have be granted access
-    # to the "user" scope, you can access any values given in this example API
-    # response: http://developer.github.com/v3/users/#response
-    data[:login] = client.user.login # => "octocat"
-    data[:email] = client.user.email # => "octocat@github.com"
-    data[:location] = client.user.location # => "San Francisco"
-    
-    # Repository Data:
-    # Repository data is available via client.repository (for a specific repo)
-    # or client.repositories for the full list of repos. As long as you have been
-    # granted access to the "repo" scope, you can access any values given in this
-    # example API response: http://developer.github.com/v3/repos/#response-1
-    #
-    # Get data from a specific repository, if that repository exists.
-    if client.repository?("octocat/Hello-World")
-      data[:repo_id] = client.repository("octocat/Hello-World").id
-      data[:repo_forks] = client.repository("octocat/Hello-World").forks_count
-      data[:repo_stars] = client.repository("octocat/Hello-World").stargazers_count
-      data[:repo_watchers] = client.repository("octocat/Hello-World").watchers_count
-      data[:repo_full_name] = client.repository("octocat/Hello-World").full_name
-      data[:repo_description] = client.repository("octocat/Hello-World").description
-      # Note: You can see all repo methods by printing client.repository("octocat/Hello-World").methods
-    end
-    
-    # Instantiate an array for storing repo names.
-    data[:repo_names] = Array.new
-    # Loop through all repositories and collect repo names.
-    client.repositories.each do |repo|
-      data[:repo_name] << repo.name
-    end
-    
-    return data
-  end
+user_repos.each do |i|
+  recent_repos << i[:name] if (i[:created_at].to_date > (Date.today - 5))
 end
+
+#languages 
+# user_languages = Octokit.languages (name+"/"+user_repos[1].name)
+
+user_repos.each do |i|
+user_languages_with_bytes = Octokit.languages (name+"/"+ i.name)
+user_languages << user_languages_with_bytes[0]
+end
+
+puts "Number of stars for #{name} = #{stargazers_count}"
+puts "Number of forks for #{name} = #{forks_count_count}"
+
+
+user_languages.each do |i|
+  puts "Languages used by #{name} ==== #{i}"
+end
+
+recent_repos.each do |i|
+  puts "Popular repos for #{name} #{i}"
+end
+
+
