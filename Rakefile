@@ -8,12 +8,12 @@ Rake::Task["db:drop"].clear
 # NOTE: Assumes SQLite3 DB
 desc "create the database"
 task "db:create" do
-  touch 'db/db.sqlite3'
+  touch 'postgres'
 end
 
 desc "drop the database"
 task "db:drop" do
-  rm_f 'db/db.sqlite3'
+  rm_f 'postgres'
 end
 
 task 'db:create_migration' do
