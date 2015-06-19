@@ -14,7 +14,6 @@ body {
 html,
 body {
   height: 100%;
-  /*background-color: #333;*/
   background: url('../images/bg_dark.png');
   background-size: 40px 40px;
   background-repeat: repeat;
@@ -22,7 +21,7 @@ body {
 body {
   color: #fff;
   /*text-align: center;*/
-  text-shadow: 0 1px 3px rgba(0,0,0,.5);
+  /*text-shadow: 0 1px 3px rgba(0,0,0,.5);*/
 }
 
 .btn-success {
