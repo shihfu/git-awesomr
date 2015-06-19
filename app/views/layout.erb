@@ -11,86 +11,41 @@
   <link rel="icon" href="/images/favicon.ico">
 
   <title>Git Awesomr</title>
-
-  <!-- Bootstrap core CSS -->
   <link rel="stylesheet" href="/stylesheets/bootstrap.css">
   <link rel="stylesheet" href="/stylesheets/custom_template.css">
 </head>
 
 <body>
-<nav class="navbar navbar-inverse navbar-fixed-top">
-  <div class="container">
-    <div class="navbar-header">
-      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
-        <span class="sr-only">Toggle navigation</span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-      </button>
-      <a class="navbar-brand" href="/"><span style="font-size: 24px; color:white">Git <span style="color:#F6bb42">Awesomr</span></span></a>
-    </div>
-    <div id="navbar" class="navbar-collapse collapse">
-      <form class="navbar-form navbar-right">
-        <!-- LOGIN FORM -->
-        <!-- <div class="form-group">
-          <input type="text" placeholder="Email" class="form-control">
-        </div>
-        <div class="form-group">
-          <input type="password" placeholder="Password" class="form-control">
-        </div> -->
-        <button type="submit" class="btn btn-success">Sign in with GitHub <img src="/images/icn_join_w.png" alt="Join" height="20" width="20"></button>
-      </form>
-    </div><!--/.navbar-collapse -->
-  </div>
-</nav>
+  <nav class="navbar navbar-inverse navbar-fixed-top">
+    <div class="container">
 
-<!-- Main jumbotron for a primary marketing message or call to action -->
-<!-- <div class="jumbotron">
+      <div class="navbar-header">
+        <a class="navbar-brand" href="/"><span style="font-size: 24px; color:white">Git <span style="color:#FFCE54">Awesomr </span>|</span></a>
+        <a class="navbar-brand" href="/"><span style="font-size: 18px; color:white">Profile</span></a>
+        <a class="navbar-brand" href="/"><span style="font-size: 18px; color:white">Group</span></a>
+      </div>
+
+      <div id="navbar" class="navbar-collapse collapse">
+        <form class="navbar-form navbar-right">
+          <button type="submit" class="btn btn-success">Sign in with GitHub <img src="/images/icn_join_w.png" alt="Join" height="20" width="20"></button>
+          <button type="submit" class="btn btn-default">Sign out</button>
+        </form>
+      </div><!--/.navbar-collapse -->
+
+    </div>
+  </nav>
+
   <div class="container">
     
-  </div>
-</div> -->
+    <%= yield %>
+    
+    <!-- <hr> -->
+<!--     <footer>
+      <p align="right">Insert footer here</p>
+    </footer> -->
+  </div><!-- /container -->
 
-<div class="container">
-  <!-- Example row of columns -->
-  <!-- INSERT BELOW -->
-  <%= yield %>
-  <!-- INSERT ABOVE -->
-  <p><a class="btn btn-default" href="" role="button">Learn more »</a></p>
-
-<!--   <div class="row">
-    <div class="col-md-4">
-      <h2>Heading</h2>
-      <p>Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui. </p>
-      <p><a class="btn btn-default" href="" role="button">View details »</a></p>
-    </div>
-    <div class="col-md-4">
-      <h2>Heading</h2>
-      <p>Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui. </p>
-      <p><a class="btn btn-default" href="" role="button">View details »</a></p>
-   </div>
-    <div class="col-md-4">
-      <h2>Heading</h2>
-      <p>Donec sed odio dui. Cras justo odio, dapibus ac facilisis in, egestas eget quam. Vestibulum id ligula porta felis euismod semper. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus.</p>
-      <p><a class="btn btn-default" href="" role="button">View details »</a></p>
-    </div>
-  </div>
- -->
-  <hr>
-
-  <footer>
-    <p align="right">Insert footer here</p>
-  </footer>
-</div> <!-- /container -->
-
-<!-- Placed at the end of the document so the pages load faster -->
-<script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
-<script src="/javascript/application.js"></script>
-<script src="./Jumbotron Template for Bootstrap_files/jquery.min.js"></script>
-<script src="./Jumbotron Template for Bootstrap_files/bootstrap.min.js"></script>
-<!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
-<script src="./Jumbotron Template for Bootstrap_files/ie10-viewport-bug-workaround.js"></script>
-
-
+  <!-- Placed at the end of the document so the pages load faster -->
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+  <script src="/javascript/application.js"></script>
 </body>
-<!-- <span class="gr__tooltip"><span class="gr__tooltip-content"></span><i class="gr__tooltip-logo"></i><span class="gr__triangle"></span></span></html> -->
