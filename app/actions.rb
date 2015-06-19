@@ -73,8 +73,10 @@ get '/callback' do
   end
 
   session[:user_id] = user.id
+
   
   redirect '/user/login'
+
 end
 
 get '/logout' do
@@ -82,8 +84,14 @@ get '/logout' do
   redirect '/'
 end
 
+
 get '/user' do
   erb :'user/index'
+end
+
+get '/id' do
+  @user = current_user
+  erb :'/users/id'
 end
 
 get '/group' do
