@@ -1,3 +1,9 @@
+/** {
+  border-color: white;
+  border-style: dashed;
+  border-width: 1px;
+}
+*/
 /* Move down content because we have a fixed navbar that is 50px tall */
 body {
   padding-top: 50px;
@@ -9,7 +15,7 @@ html,
 body {
   height: 100%;
   /*background-color: #333;*/
-  background: url('../images/attachments-bg-0dcf1ce34690ac81c4fb0cbc36365bd3.png');
+  background: url('../images/bg_dark.png');
   background-size: 40px 40px;
   background-repeat: repeat;
 }
@@ -20,6 +26,12 @@ body {
 }
 
 .btn-success {
+  color: #fff;
+  background-color: #FFCE54;
+  border-color: #F6bb42;
+}
+
+.btn-success:hover {
   color: #fff;
   background-color: #F6bb42;
   border-color: #FFCE54;
@@ -35,4 +47,70 @@ body {
   border-radius: 6px;
   height: 44px;
   width: 44px;
+}
+
+.score {
+  border-radius: 6px;
+  border-color: red;
+  background-color: red;
+  color: white;
+  width: 3em;
+  height: 50px;
+  text-align: center;
+  z-index: 1;
+}
+
+.score-bg {
+  border-radius: 6px;
+  background-color: red;
+  color: white;
+  width: 2em;
+  height: 2em;
+  line-height: 2em;
+  text-align: center;
+  z-index: 1;
+}
+
+.img-container {
+  position: relative;
+}
+
+.img-container span {
+  position: absolute;
+  right: 9px;
+  top: -4em;
+}
+
+.img-achievement-1 {
+  height: 44px;
+  width:  44px;
+  background-color: white;
+  border-style: solid;
+  border-color: #fffbf1;
+  border-radius: 6px;
+  border-width: 2px;
+}
+
+.img-achievement-2 {
+  height: 44px;
+  width:  44px;
+  background-color: #cccccc;
+  border-style: solid;
+  border-color: #ffebba;
+  border-radius: 6px;
+  border-width: 2px;
+}
+
+.img-achievement-3 {
+  height: 44px;
+  width:  44px;
+  background-color: #656D78;
+  border-style: solid;
+  border-color: #e5b94b;
+  border-radius: 6px;
+  border-width: 2px;
+}
+
+.progress-bar {
+  background-color: #F6bb42;
 }

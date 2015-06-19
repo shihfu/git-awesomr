@@ -1,4 +1,3 @@
-
 # Homepage (Root path)
 
 def current_user
@@ -83,6 +82,10 @@ get '/logout' do
   redirect '/'
 end
 
+get '/user' do
+  erb :'user/index'
+end
 
-
-# 3e8a7d7a66e54f67430b94826737de95c650b1d5
+get '/group' do
+  erb :'group/index'
+end
