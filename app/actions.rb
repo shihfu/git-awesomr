@@ -1,47 +1,26 @@
 # Homepage (Root path)
 
-# get '/' do
-#   erb :index#, :locals => {:client_id => "ec929278fb87047f1280"}
-# end
-
-
-# def helpers
-
-  # def new_user
-  #   client = Octokit::Client.new(:access_token => session[:access_token])
-
-
-  #   user = client.user
-    
-  #   @user = User.create
-  #   (
-  #     username: user.login,
-  #     token: session[:access_token],
-  #     avatar_url: user.avatar_url,
-  #     location: user.location,
-  #     followers: user.followers,
-  #     following: user.following,
-  #     public_repos: user.public_repos,
-  #     public_gists: user.public_gists,
-  #     start_date: user.created_at
-  #   )
-
-  # end
-
-# end
-
 def current_user
   User.find(session[:user_id]) if session[:user_id]
 end
 
+# helpers do
+#   def current_user
+#     binding.pry
+#     if session[:user_id]
+#       if @current_user.nil?
+#         @current_user = User.find(session[:user_id])
+#       end
+#       # Can be rewritten as
+#       # @current_user ||= User.find(session[:user_id])
+#     end
+#     @current_user
+#   end
+# end
+
 
 get "/" do
-  # gh_data = get_github_data()
-  # Pass in the CLIENT_ID for the login button on the home page.
-  # @user = current_user
-  
   erb :index
-
 end
 
 get "/me" do
@@ -52,6 +31,11 @@ end
 get '/login' do
   client_id = 'ec929278fb87047f1280'
   redirect "https://github.com/login/oauth/authorize?scope=user&client_id=#{client_id}"
+end
+
+get '/user/login' do
+  @user = current_user
+  erb :login
 end
 
 
@@ -89,8 +73,7 @@ get '/callback' do
   end
 
   session[:user_id] = user.id
-  @user = current_user
-  erb :login
+  redirect '/user/login'
 end
 
 get '/logout' do
