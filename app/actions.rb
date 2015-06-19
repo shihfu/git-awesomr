@@ -35,7 +35,8 @@ end
 
 get '/user/login' do
   @user = current_user
-  erb :login
+  # erb :login
+  erb :'user/index'
 end
 
 

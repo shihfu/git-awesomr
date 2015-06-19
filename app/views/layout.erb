@@ -27,12 +27,11 @@
 
       <div id="navbar">
         <form class="navbar-form navbar-right">
-          <!-- NOT SURE IF THIS 'if' STATEMENT IS CORRECT. -->
           <% if @user %>
             <a href="/logout" class="btn btn-default">Sign out</a>
           <% else %>
             <a href="/login" class="btn btn-success">Sign in with GitHub <img src="/images/icn_join_w.png" alt="Join" height="20" width="20"></a>
-          <%end%>      
+          <%end%>
         </form>
       </div><!--/.navbar-collapse -->
     </div>
