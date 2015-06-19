@@ -72,7 +72,7 @@ get '/callback' do
 
   data = Octokit::Client.new(access_token: token).user
 
-  user = User.find_by(username: data.username)
+  user = User.find_by(username: data.login)
 
   unless user then
     user = User.create(
@@ -89,6 +89,7 @@ get '/callback' do
   end
 
   session[:user_id] = user.id
+  @user = current_user
   erb :login
 end
 
@@ -97,8 +98,14 @@ get '/logout' do
   redirect '/'
 end
 
+
 get '/user' do
   erb :'user/index'
+end
+
+get '/id' do
+  @user = current_user
+  erb :'/users/id'
 end
 
 get '/group' do
