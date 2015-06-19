@@ -21,7 +21,10 @@
     <p><%= @user.location %></p>
 
     <h4>Languages: </h4>
-    - INSERT HERE -
+    <!-- UPDATE BELOW WITH < > -->
+    % @user.languages do |language| %
+      %= language %
+    % end %
 
     <h4>Belongs to: </h4>
     <a href="/group"><img src="/images/lighthouse.png" alt="..." class="img-rounded-sm"></a>
@@ -29,6 +32,7 @@
   
   <div class="col-md-5">
     <h2>Achievements</h2>
+    <!-- ACCOUNT OPEN ACHIEVEMENT -->
     <!-- <img src="/images/outline_open.png" alt="Lvl. 1" class="img-achievement-1">
     <img src="/images/solid_open.png" alt="Lvl. 2" class="img-achievement-2">
     <img src="/images/flat_open.png" alt="Lvl. 3" class="img-achievement-3"><br>
