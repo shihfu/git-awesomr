@@ -35,7 +35,7 @@
 
   <div class="container">
     <%= yield %>
-    <% if @user %>
+    <% if @user %> <!-- ONLY DISPLAY FOOTER IF USER IS LOGGED IN -->
       <hr>
       <footer>
         <p align="right">Insert footer here</p>
@@ -43,7 +43,7 @@
     <% end %>
   </div>
 
-  <!-- Placed at the end of the document so the pages load faster -->
+  <!-- PLACE ALL JS FILES RIGHT BEFORE THE CLOSING BODY TAG, SO THE PAGES LOAD FASTER -->
   <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
   <script src="/javascript/application.js"></script>
 </body>
