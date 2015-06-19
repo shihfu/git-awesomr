@@ -16,39 +16,34 @@
 </head>
 
 <body>
-  <nav class="navbar navbar-inverse navbar-fixed-top">
-    <div class="container">
-
-      <div class="navbar-header">
-        <a class="navbar-brand" href="/"><span style="font-size: 24px; color:white">Git <span style="color:#FFCE54">Awesomr </span>|</span></a>
-        <a class="navbar-brand" href="/"><span style="font-size: 18px; color:white">Profile</span></a>
-        <a class="navbar-brand" href="/"><span style="font-size: 18px; color:white">Group</span></a>
+  <% if @user %> <!-- ONLY DISPLAY NAV BAR IF USER IS LOGGED IN -->
+    <nav class="navbar navbar-inverse navbar-fixed-top">
+      <div class="container">
+        <div class="navbar-header">
+            <a class="navbar-brand" href="/"><span style="font-size: 24px; color:white">Git <span style="color:#FFCE54">Awesomr </span><% if @user %>| <% end%></span></a>      
+            <a class="navbar-brand" href="/user"><span style="font-size: 18px; color:white">Profile</span></a>
+            <a class="navbar-brand" href="/group"><span style="font-size: 18px; color:white">Group</span></a>
+        </div>
+        <div id="navbar">
+          <form class="navbar-form navbar-right">
+              <a href="/logout" class="btn btn-default">Sign out</a>
+          </form>
+        </div>
       </div>
-
-      <div id="navbar" class="navbar-collapse collapse">
-        <form class="navbar-form navbar-right">
-        <% if @user then %>
-        <% else %>
-        <a href="/login" class="btn btn-success">Sign in with GitHub <img src="/images/icn_join_w.png" alt="Join" height="20" width="20"></a>
-        <%end%>
-        <a href="/logout" class="btn btn-default">Sign out</a>
-        </form>
-      </div><!--/.navbar-collapse -->
-    </div>
-  </nav>
-
+    </nav>
+  <% end %>
 
   <div class="container">
-    
     <%= yield %>
-    
-    <!-- <hr> -->
-<!--     <footer>
-      <p align="right">Insert footer here</p>
-    </footer> -->
-  </div><!-- /container -->
+    <% if @user %> <!-- ONLY DISPLAY FOOTER IF USER IS LOGGED IN -->
+      <hr>
+      <footer>
+        <p align="right">Insert footer here</p>
+      </footer>
+    <% end %>
+  </div>
 
-  <!-- Placed at the end of the document so the pages load faster -->
+  <!-- PLACE ALL JS FILES RIGHT BEFORE THE CLOSING BODY TAG, SO THE PAGES LOAD FASTER -->
   <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
   <script src="/javascript/application.js"></script>
 </body>
