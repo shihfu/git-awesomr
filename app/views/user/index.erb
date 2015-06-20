@@ -2,7 +2,7 @@
   <% if @user %>
     <%= @user.username %>
   <% else %>
-    <span style="color: red">Not logged In</span>
+    <span style="color: red">Not logged in</span>
   <% end %>
   ('/user/:id')
 </h2>
@@ -13,7 +13,9 @@
     <br>
     <a href="" class="img-container">
       <img src=<%= @user.avatar_url %> alt=<%= @user.avatar_url %> class="img-rounded-bg">
-      <span class="score-bg">28</span>
+      <span class="score-bg">
+        <!-- %= @user.score % -->
+      </span>
     </a>
     <br>
     
@@ -21,7 +23,7 @@
     <p><%= @user.location %></p>
 
     <h4>Languages: </h4>
-    <!-- UPDATE BELOW WITH < > -->
+    <!-- UPDATE BELOW WITH < > ONCE STORED IN DATABASE -->
     % @user.languages do |language| %
       %= language %
     % end %
@@ -33,7 +35,7 @@
   <div class="col-md-5">
     <h2>Achievements</h2>
     <!-- ACCOUNT OPEN ACHIEVEMENT -->
-    <!-- <img src="/images/outline_open.png" alt="Lvl. 1" class="img-achievement-1">
+    <img src="/images/outline_open.png" alt="Lvl. 1" class="img-achievement-1">
     <img src="/images/solid_open.png" alt="Lvl. 2" class="img-achievement-2">
     <img src="/images/flat_open.png" alt="Lvl. 3" class="img-achievement-3"><br>
     Have your GitHub account registered longer than a year<br>
@@ -41,8 +43,9 @@
       <div class="progress-bar" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width: 100%;">
         100%
       </div>
-    </div> -->
+    </div>
 
+    <!-- LANGUAGES ACHIEVEMENT -->
     <img src="/images/outline_languages.png" alt="Lvl. 1" class="img-achievement-1">
     <img src="/images/solid_languages.png" alt="Lvl. 2" class="img-achievement-2">
     <img src="/images/flat_languages.png" alt="Lvl. 3" class="img-achievement-3"><br>
@@ -53,6 +56,7 @@
       </div>
     </div>
 
+    <!-- FOLLOWERS ACHIEVEMENT -->
     <img src="/images/outline_earth.png" alt="Lvl. 1" class="img-achievement-1">
     <img src="/images/solid_earth.png" alt="Lvl. 2" class="img-achievement-2">
     <img src="/images/flat_earth.png" alt="Lvl. 3" class="img-achievement-3"><br>
@@ -63,6 +67,7 @@
       </div>
     </div>
 
+    <!-- ACTIVE STREAK ACHIEVEMENT -->
     <img src="/images/outline_motherboard.png" alt="Lvl. 1" class="img-achievement-1">
     <img src="/images/solid_motherboard.png" alt="Lvl. 2" class="img-achievement-2">
     <img src="/images/flat_motherboard.png" alt="Lvl. 3" class="img-achievement-3"><br>
@@ -73,6 +78,7 @@
       </div>
     </div>
 
+    <!-- REPOSITORIES ACHIEVEMENT -->
     <img src="/images/outline_documents.png" alt="Lvl. 1" class="img-achievement-1">
     <img src="/images/solid_documents.png" alt="Lvl. 2" class="img-achievement-2">
     <img src="/images/flat_documents.png" alt="Lvl. 3" class="img-achievement-3"><br>
@@ -83,6 +89,7 @@
       </div>
     </div>
 
+    <!-- COMMITS ACHIEVEMENT -->
     <img src="/images/outline_seat_belt.png" alt="Lvl. 1" class="img-achievement-1">
     <img src="/images/solid_seat_belt.png" alt="Lvl. 2" class="img-achievement-2">
     <img src="/images/flat_seat_belt.png" alt="Lvl. 3" class="img-achievement-3"><br>
@@ -93,6 +100,7 @@
       </div>
     </div>
 
+    <!-- STARS ACHIVEMENT -->
     <img src="/images/outline_wizard.png" alt="Lvl." class="img-achievement-1">
     <img src="/images/solid_wizard.png" alt="Lvl." class="img-achievement-2">
     <img src="/images/flat_wizard.png" alt="Lvl." class="img-achievement-3"><br>

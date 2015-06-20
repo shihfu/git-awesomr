@@ -51,7 +51,6 @@ get '/callback' do
       avatar_url: data.avatar_url,
       location: data.location,
       followers: data.followers,
-      following: data.following,
       public_repos: data.public_repos,
       public_gists: data.public_gists,
       start_date: data.created_at
