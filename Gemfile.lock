@@ -36,7 +36,6 @@ GEM
     netrc (0.10.3)
     octokit (3.8.0)
       sawyer (~> 0.6.0, >= 0.5.3)
-    pg (0.18.2)
     pry (0.10.1)
       coderay (~> 1.1.0)
       method_source (~> 0.8.1)
@@ -101,7 +100,6 @@ PLATFORMS
 DEPENDENCIES
   activesupport
   octokit (~> 3.0)
-  pg
   pry
   puma
   rake
