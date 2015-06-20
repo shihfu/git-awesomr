@@ -1,7 +1,42 @@
-<img src="/images/outline_languages.png" alt="Lvl. 1" class="img-achievement-1">
-    <img src="/images/solid_languages.png" alt="Lvl. 2" class="img-achievement-2">
-    <img src="/images/flat_languages.png" alt="Lvl. 3" class="img-achievement-3">
-    <br>Have used more than 5 languages<br>
+<%#lang_achieves = @achievement.where(name:'language',criteria: lang_all.delete('nil').count %>
+<%#=lang_achieves.url%>
+<% lang_all=[]%>
+<% @user.repos.each do |repo| %>
+<% lang_all << repo.language %>
+<% lang_all.compact!%>
+<% end %>
+
+<%#@followers = User.first.followers
+@achievement_name = Achievement.where(name: "Followers")
+@achievements = []
+@achievements = @achievement_name.select {|a| a.criteria <= @followers}%>
+
+
+<%lang_all.uniq!%>
+<%lang_ach =[]%>
+<%achievement_name =[]%>
+<%lang_ach_url_1 = ""%>
+<%lang_ach_url_2 = ""%>
+<%lang_ach_url_3 = ""%>
+<%achievement_name = @achievement.where name: "Language"%>
+<%lang_ach = achievement_name.select{|level| level.criteria <=(lang_all.count) } %>
+<%lang_ach_url_1 = lang_ach[0][:url]%>
+<%lang_ach_url_2 = lang_ach[1][:url] if lang_ach[1]%>
+<%lang_ach_url_3 = lang_ach[2][:url] if lang_ach[2]%>
+
+    <%if lang_ach[0]%>
+    <img src= <%=lang_ach_url_1%> alt="Lvl. 2" class="img-achievement-1">
+    <%end%>
+
+    <%if lang_ach[1]%>
+    <img src= <%=lang_ach_url_2%> alt="Lvl. 2" class="img-achievement-2">
+    <%end%>
+
+    <%if lang_ach[3]%>
+    <img src= <%=lang_ach_url_3%> alt="Lvl. 3" class="img-achievement-3">
+    <%end%>
+
+    <br> You have used <%=lang_all.count%> languages <br>
     <div class="progress">
       <div class="progress-bar" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width: 100%;">
         100%

@@ -12,6 +12,10 @@ def current_user
   User.find(session[:user_id]) if session[:user_id]
 end
 
+def achievements
+  Achievement.all
+end
+
 get "/" do
   erb :index
 end
@@ -29,6 +33,7 @@ end
 
 get '/user/:username' do
   @user = current_user
+  @achievement = achievements
   erb :'user/index'
 end
 
@@ -106,4 +111,9 @@ get '/callback' do
   session[:user_id] = user.id
 
   redirect "/user/#{user.username}"
+end
+
+get '/logout' do
+  session.clear
+  redirect '/'
 end
