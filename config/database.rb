@@ -1,4 +1,5 @@
-require 'pg'  # gem install pg    Postgres gem
+# require 'pg'  # gem install pg    Postgres gem
+require 'sqlite3'
 require 'pry'
 require 'active_record'
 

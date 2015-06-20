@@ -7,58 +7,57 @@ require 'date'
 name = 'torvalds'
 # GET /users/:username/repos
 user_repos = Octokit.repositories name
-total_commits = 0
+# total_commits = 0
 
 user_repos.each do |i|
   commit_activity = Octokit.participation_stats(name+"/"+user_repos[1].name)
   total_commits += commit_activity[:owner].inject(0){|total,week| total+week}
-  binding.pry
 end
 
-puts "Number of commits for all repos in the last year for #{name} = #{total_commits}"
+# puts "Number of commits for all repos in the last year for #{name} = #{total_commits}"
 
 # # puts "average number of commits per repo #{total_commits/}"
 
-# stargazers_count = 0
-# forks_count_count = 0
-# recent_repos =[]
-# user_languages =[]
-# user_unique_languages =[]
+stargazers_count = 0
+forks_count_count = 0
+recent_repos =[]
+user_languages =[]
+user_unique_languages =[]
 
-# user_repos.each do |i|
-#   stargazers_count += i[:stargazers_count]
-# end
+user_repos.each do |i|
+  stargazers_count += i[:stargazers_count]
+end
 
-# user_repos.each do |i|
-#   forks_count_count += i [:forks_count]
-# end
+user_repos.each do |i|
+  forks_count_count += i [:forks_count]
+end
 
-# user_repos.each do |i|
-#   recent_repos << i[:name] if (i[:updated_at].to_date > (Date.today - 50))
-# end
-
-
-
-# user_repos.each do |i|
-#   user_languages << i [:language] if i [:language]
-# end
+user_repos.each do |i|
+  recent_repos << i[:name] if (i[:updated_at].to_date > (Date.today - 50))
+end
 
 
-# puts "Number of stars for #{name} = #{stargazers_count}"
-# puts "Number of forks for #{name} = #{forks_count_count}"
 
-# puts "Number of langauages for user #{user_languages.uniq.count}"
-
-# user_unique_languages = user_languages.uniq
-
-# user_unique_languages .each do |i|
-#   puts "Languages used by #{name} ==== #{i}"
-# end
+user_repos.each do |i|
+  user_languages << i [:language] if i [:language]
+end
 
 
-# recent_repos.each do |i|
-#   puts "Popular repos for #{name} #{i}"
-# end
+puts "Number of stars for #{name} = #{stargazers_count}"
+puts "Number of forks for #{name} = #{forks_count_count}"
+
+puts "Number of langauages for user #{user_languages.uniq.count}"
+
+user_unique_languages = user_languages.uniq
+
+user_unique_languages .each do |i|
+  puts "Languages used by #{name} ==== #{i}"
+end
+
+
+recent_repos.each do |i|
+  puts "Popular repos for #{name} #{i}"
+end
 
 
 

@@ -42,11 +42,17 @@ get '/callback' do
 
   data = Octokit::Client.new(access_token: token).user
 
+  user_repos = Octokit.repositories data.login
+
   user = User.find_by(username: data.login)
 
+  user_full_name = data.name.split
+  total_commits = 0
   unless user then
     user = User.create(
       username: data.login,
+      first_name: user_full_name[0],
+      last_name: user_full_name[1],
       token: token,
       avatar_url: data.avatar_url,
       location: data.location,
@@ -55,7 +61,61 @@ get '/callback' do
       public_gists: data.public_gists,
       start_date: data.created_at
     )
+
+    user_repos.each do |repo|
+    commit_activity = Octokit.participation_stats(data.login+"/"+repo.name)
+    total_commits += commit_activity[:owner].inject(0){|total,week| total+week}
+    user_achievement_info = Repo.create(
+    name: repo.name,
+    stars_count: repo.stargazers_count,
+    forks_count: repo.forks_count,
+    commits_count: total_commits,
+    language: repo.language
+    )
+    total_commits = 0
   end
+end
+
+
+  # stargazers_count = 0
+  # forks_count_count = 0
+  # total_commits = 0
+  # recent_repos = []
+  # user_languages = []
+  # user_unique_languages = []
+
+  # user_repos.each do |i|
+  #   commit_activity = Octokit.participation_stats(data.login+"/"+user_repos[1].name)
+  #   total_commits += commit_activity[:owner].inject(0){|total,week| total+week}
+  # end
+
+  # user_repos.each do |i|
+  #   stargazers_count += i[:stargazers_count]
+  # end
+
+  # user_repos.each do |i|
+  #   forks_count_count += i [:forks_count]
+  # end
+
+  # user_repos.each do |i|
+  #   recent_repos << i[:name] if (i[:updated_at].to_date > (Date.today - 50))
+  # end
+
+  # user_repos.each do |i|
+  # user_languages << i [:language] if i [:language]
+  # end
+
+  # user_unique_languages = user_languages.uniq
+
+  # user_achievement_info = Repo.create(
+  #   name: data.login,
+  #   stars_count: stargazers_count,
+  #   forks_count: forks_count_count,
+  #   commits_count: total_commits,
+  #   language: user_unique_languages
+  #   )
+
+  # end
 
   session[:user_id] = user.id
   
