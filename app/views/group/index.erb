@@ -1,12 +1,13 @@
+<!-- CHARTJS DATA -->
 <script>
   $(document).ready(function() {
   // See: http://docs.jquery.com/Tutorials:Introducing_$(document).ready()
   var user = <%= @achievement[:user] %>;
   var group = <%= @achievement[:group] %>;
 
-  
+  // ACHIVEMENTS GRAPH
   var data = {
-    labels: ["Open", "Languages", "Followers", "Active Streak", "Respositories", "Commits", "Stars"],
+    labels: ["Acc. Age", "Languages", "Followers", "Active Streak", "Respositories", "Commits", "Stars"],
     datasets: [
       {
           label: "User",
@@ -32,14 +33,50 @@
       }
     ]
   };
-
   // Get context with jQuery - using jQuery's .get() method.
   var ctx = $("#achievements").get(0).getContext("2d");
-  // This will get the first returned node in the jQuery collection.
-  // var myNewChart = new Chart(ctx);
-
   var myLineChart = new Chart(ctx).Line(data);
-});
+
+
+
+
+  // See: http://docs.jquery.com/Tutorials:Introducing_$(document).ready()
+  var user_score = <%= @average_score[:user] %>;
+  var group_score = <%= @average_score[:group] %>;
+
+  // AVERAGE SCORE GRAPH
+  var data = {
+    labels: ["Jeff", "Phil", "Beth", "Ramtin", "Raymond", "Matt", "Robin", "Andrew"],
+    datasets: [
+      {
+          label: "User",
+          fillColor: "rgba(249,213,139,0.1)",
+          strokeColor: "#F6bb42",
+          pointColor: "#FFCE54",
+          pointStrokeColor: "#fff",
+          pointHighlightFill: "#fff",
+          pointHighlightStroke: "rgba(220,220,220,1)",
+          // data: [3, 3, 1, 3, 2, 3, 2]
+          data: user_score
+      },
+      {
+          label: "Group",
+          fillColor: "rgba(204,204,204,0.2)",
+          strokeColor: "white",
+          pointColor: "rgba(220,220,220,1)",
+          pointStrokeColor: "#fff",
+          pointHighlightFill: "#fff",
+          pointHighlightStroke: "rgba(151,187,205,1)",
+          // data: [2.7, 2.1, 2.6, 1.8, 2.2, 2.3, 1.8]
+          data: group_score
+      }
+    ]
+  };
+  // Get context with jQuery - using jQuery's .get() method.
+  var ctx = $("#average_scores").get(0).getContext("2d");
+  var myLineChart = new Chart(ctx).Line(data);
+
+  });
 </script>
 
 
@@ -81,7 +118,7 @@
   </div>
   
   <div class="col-md-10">
-    <h2>Leaderboard</h2>
+    <h2>Leaderboard: </h2>
     <table class="table">
       <tr>
         <th>#</th>
@@ -146,19 +183,30 @@
   </div>
 
   <div class="col-md-10">
-  
+    <h2>Statistics: </h2>
+    
+    <h4>Me <span style="color:white">vs Average Achievement Level</span></h4>
+    <canvas id="achievements"></canvas>
+
+
+    <h4>Members <span style="color:white">vs Average Score</span></h4>
+    <canvas id="average_scores"></canvas>
+  </div>
+
+<!--   <div class="col-md-5">
     <h2>Statistics (Graphs & Charts)</h2>
     <h4>Achievement level</h4>
-    <canvas id="achievements" width="640" height="240"></canvas>
-
-
-
-
-
-
-
+    <canvas id="achievements"></canvas>
   </div>
+
+  <div class="col-md-5">
+    <h2>&nbsp;</h2>
+    <h4>Average Score</h4>
+    <canvas id="average_scores"></canvas>
+  </div> -->
 </div>
+
+
 
 
 

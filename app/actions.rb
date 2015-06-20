@@ -117,3 +117,42 @@ get '/logout' do
   session.clear
   redirect '/'
 end
+
+get '/user' do
+  erb :'user/index'
+end
+
+get '/id' do
+  @user = current_user
+  erb :'/users/id'
+end
+
+# get '/group' do
+#   erb :'group/new'
+# end
+
+# post '/group' do
+#   name = params[:name]
+#   username = params[:username]
+
+#   group = Group.find_by(name: name)
+#     if group
+#       redirect '/group/:id'
+#     else
+#       group = Group.create(name: name)
+#       redirect '/group/:id'
+#     end
+# end
+
+get '/group' do
+  # GRAPH DATA
+  @achievement = {}
+  @achievement[:user] = [1, 2, 3, 2, 2, 2, 3]
+  @achievement[:group] = [2, 1, 2, 3, 2, 3, 1]
+
+
+  @average_score = {}
+  @average_score[:user] = [10, 20, 30, 20, 20, 20, 30, 30]
+  @average_score[:group] = [20, 20, 20, 20, 20, 20, 20, 20]
+  erb :'group/index'
+end
