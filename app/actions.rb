@@ -1,59 +1,89 @@
-# Homepage (Root path)
+#!/usr/bin/env ruby
+
+require 'sinatra'
+require 'octokit'
+
+CLIENT_ID = 'ec929278fb87047f1280'
+CLIENT_SECRET = '2f6d93489179df343c2fc243d0a1aafd471d556e'
+
+use Rack::Session::Cookie, :secret => rand.to_s()
 
 def current_user
   User.find(session[:user_id]) if session[:user_id]
+end
+
+def achievements
+  Achievement.all
 end
 
 get "/" do
   erb :index
 end
 
-get "/me" do
-  @user = current_user
-  json @user
+def authenticated?
+  session[:access_token]
 end
 
-get '/login' do
-  client_id = 'ec929278fb87047f1280'
-  redirect "https://github.com/login/oauth/authorize?scope=user&client_id=#{client_id}"
+def authenticate!
+  client = Octokit::Client.new
+  url = client.authorize_url CLIENT_ID, :scope => 'user'
+
+  redirect url
 end
 
-get '/user/login' do
+get '/user/:username' do
   @user = current_user
-  # erb :login
+  @achievement = achievements
   erb :'user/index'
 end
 
+get '/login' do
+  if !authenticated?
+    authenticate!
+  else
+    access_token = session[:access_token]
+    scopes = []
+
+    client = Octokit::Client.new \
+      :client_id => CLIENT_ID,
+      :client_secret => CLIENT_SECRET
+
+    begin
+      client.check_application_authorization access_token
+    rescue => e
+      # request didn't succeed because the token was revoked so we
+      # invalidate the token stored in the session and render the
+      # index page so that the user can start the OAuth flow again
+      session[:access_token] = nil
+      return authenticate!
+    end
+
+    client = Octokit::Client.new :access_token => access_token
+    data = client.user
+    user = User.find_by(username: data.login)
+    session[:user_id] = user.id
+    redirect "/user/#{user.username}"
+end
+end
 
 get '/callback' do
-  # Get temporary GitHub code...
   session_code = request.env['rack.request.query_hash']['code']
- 
-  result = RestClient.post('https://github.com/login/oauth/access_token',
-    {
-      client_id: ENV['CLIENT_ID'] || 'ec929278fb87047f1280',
-      client_secret: ENV['CLIENT_SECRET'] || '2f6d93489179df343c2fc243d0a1aafd471d556e',
-      code: session_code,
-    },
-    accept: :json
-  ) 
-  # Make the access token available across sessions.
-  token = JSON.parse(result)['access_token']
+  result = Octokit.exchange_code_for_token(session_code, CLIENT_ID, CLIENT_SECRET)
+  session[:access_token] = result[:access_token]
 
-  data = Octokit::Client.new(access_token: token).user
-
-  user_repos = Octokit.repositories data.login
-
+  client = Octokit::Client.new :access_token => session[:access_token]
+  data = client.user
   user = User.find_by(username: data.login)
-
+  user_repos = Octokit.repositories data.login
   user_full_name = data.name.split
   total_commits = 0
+
   unless user then
     user = User.create(
       username: data.login,
       first_name: user_full_name[0],
       last_name: user_full_name[1],
-      token: token,
+      token: session[:access_token],
       avatar_url: data.avatar_url,
       location: data.location,
       followers: data.followers,
@@ -62,22 +92,25 @@ get '/callback' do
       start_date: data.created_at
     )
 
-    # user_repos.each do |repo|
-    # commit_activity = Octokit.participation_stats(data.login+"/"+repo.name)
-    # total_commits += commit_activity[:owner].inject(0){|total,week| total+week}
-    # user_achievement_info = Repo.create(
-    # name: repo.name,
-    # stars_count: repo.stargazers_count,
-    # forks_count: repo.forks_count,
-    # commits_count: total_commits,
-    # language: repo.language
-    # )
-    # total_commits = 0
-  end
+    user_repos.each do |repo|
+      commit_activity = Octokit.participation_stats(data.login+"/"+repo.name)
+      total_commits += commit_activity[:owner].inject(0){|total,week| total+week} if commit_activity
+
+      user_achievement_info = Repo.create(
+      name: repo.name,
+      user_id: user.id,
+      stars_count: repo.stargazers_count,
+      forks_count: repo.forks_count,
+      commits_count: total_commits,
+      language: repo.language
+      )
+      total_commits = 0
+    end
+ end
 
   session[:user_id] = user.id
-  
-  redirect '/user/login'
+
+  redirect "/user/#{user.username}"
 end
 
 get '/logout' do
@@ -123,4 +156,3 @@ get '/group' do
   @average_score[:group] = [20, 20, 20, 20, 20, 20, 20, 20]
   erb :'group/index'
 end
-
