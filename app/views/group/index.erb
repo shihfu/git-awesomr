@@ -35,7 +35,7 @@
   };
   // Get context with jQuery - using jQuery's .get() method.
   var ctx = $("#achievements").get(0).getContext("2d");
-  var myLineChart = new Chart(ctx).Line(data);
+  var myLineChart = new Chart(ctx).Bar(data);
 
 
 
@@ -46,7 +46,7 @@
 
   // AVERAGE SCORE GRAPH
   var data = {
-    labels: ["Jeff", "Phil", "Bett", "Ramtin", "Raymond", "Matt", "Robin", "Andrew"],
+    labels: ["Jeff", "Phil", "Beth", "Ramtin", "Raymond", "Matt", "Robin", "Andrew"],
     datasets: [
       {
           label: "User",
@@ -118,7 +118,7 @@
   </div>
   
   <div class="col-md-10">
-    <h2>Leaderboard</h2>
+    <h2>Leaderboard: </h2>
     <table class="table">
       <tr>
         <th>#</th>
@@ -183,13 +183,13 @@
   </div>
 
   <div class="col-md-10">
-    <h2>Statistics (Graphs & Charts)</h2>
+    <h2>Statistics: </h2>
     
-    <h4>Achievement level</h4>
+    <h4>Me <span style="color:white">vs Average Achievement Level</span></h4>
     <canvas id="achievements"></canvas>
 
 
-    <h4>Average Score</h4>
+    <h4>Members <span style="color:white">vs Average Score</span></h4>
     <canvas id="average_scores"></canvas>
   </div>
 
