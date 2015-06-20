@@ -117,6 +117,10 @@ get '/group' do
   @achievement[:user] = [1, 2, 3, 2, 2, 2, 3]
   @achievement[:group] = [2, 1, 2, 3, 2, 3, 1]
 
+
+  @average_score = {}
+  @average_score[:user] = [10, 20, 30, 20, 20, 20, 30, 30]
+  @average_score[:group] = [20, 20, 20, 20, 20, 20, 20, 20]
   erb :'group/index'
 end
 
