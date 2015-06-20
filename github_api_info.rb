@@ -116,4 +116,8 @@ end
 
   # end
 
+<!--     <% @languages.each do |lang| %>
+      <%= lang %>
+    <% end %> -->
+
 

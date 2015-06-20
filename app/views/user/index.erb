@@ -1,16 +1,16 @@
 <h2>Hello, 
   <% if @user %>
-    <%= @user.username %>
+    <%= @user.first_name %>
   <% else %>
     <span style="color: red">Not logged in</span>
   <% end %>
-  ('/user/:id')
+
 </h2>
 
 <hr>
 <div class="row">
   <div class="col-md-2">
-    <br>
+    <b
     <a href="" class="img-container">
       <img src=<%= @user.avatar_url %> alt=<%= @user.avatar_url %> class="img-rounded-bg">
       <span class="score-bg">
@@ -24,10 +24,14 @@
 
     <h4>Languages: </h4>
     <!-- UPDATE BELOW WITH < > ONCE STORED IN DATABASE -->
-    % @user.languages do |language| %
-      %= language %
-    % end %
-
+    <% lang_all=[]%>
+    <% @user.repos.each do |repo| %>
+    <% lang_all << repo.language if repo.language !="nil" %>
+    <% end %>
+    <%lang_all.uniq!%>
+    <%lang_all.each do |lang|%>
+    <%=lang%>
+    <%end%>
     <h4>Belongs to: </h4>
     <a href="/group"><img src="/images/lighthouse.png" alt="..." class="img-rounded-sm"></a>
   </div>
@@ -46,15 +50,9 @@
     </div>
 
     <!-- LANGUAGES ACHIEVEMENT -->
-    <img src="/images/outline_languages.png" alt="Lvl. 1" class="img-achievement-1">
-    <img src="/images/solid_languages.png" alt="Lvl. 2" class="img-achievement-2">
-    <img src="/images/flat_languages.png" alt="Lvl. 3" class="img-achievement-3">
-    <br>Have used more than 5 languages<br>
-    <div class="progress">
-      <div class="progress-bar" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width: 100%;">
-        100%
-      </div>
-    </div>
+
+    <%= erb :"user/_language.html" %>
+
 
     <!-- FOLLOWERS ACHIEVEMENT -->
     <img src="/images/outline_earth.png" alt="Lvl. 1" class="img-achievement-1">
