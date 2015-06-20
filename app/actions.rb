@@ -63,18 +63,18 @@ get '/callback' do
     )
 
     user_repos.each do |repo|
-    commit_activity = Octokit.participation_stats(data.login+"/"+repo.name)
-    total_commits += commit_activity[:owner].inject(0){|total,week| total+week}
-    user_achievement_info = Repo.create(
-    name: repo.name,
-    stars_count: repo.stargazers_count,
-    forks_count: repo.forks_count,
-    commits_count: total_commits,
-    language: repo.language
-    )
-    total_commits = 0
+      commit_activity = Octokit.participation_stats(data.login+"/"+repo.name)
+      total_commits += commit_activity[:owner].inject(0){|total,week| total+week}
+      user_achievement_info = Repo.create(
+      name: repo.name,
+      stars_count: repo.stargazers_count,
+      forks_count: repo.forks_count,
+      commits_count: total_commits,
+      language: repo.language
+      )
+      total_commits = 0
+    end
   end
-end
 
 
   # stargazers_count = 0
@@ -120,14 +120,12 @@ end
   session[:user_id] = user.id
   
   redirect '/user/login'
-
 end
 
 get '/logout' do
   session.clear
   redirect '/'
 end
-
 
 get '/user' do
   erb :'user/index'
@@ -154,3 +152,13 @@ end
 #       redirect '/group/:id'
 #     end
 # end
+
+get '/group' do
+  # GRAPH DATA
+  @achievement = {}
+  @achievement[:user] = [1, 2, 3, 2, 2, 2, 3]
+  @achievement[:group] = [2, 1, 2, 3, 2, 3, 1]
+
+  erb :'group/index'
+end
+
