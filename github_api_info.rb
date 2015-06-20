@@ -4,15 +4,20 @@ require 'ghee'
 require "octokit"
 require 'date'
 
-name = 'donburks'
+name = 'torvalds'
 # GET /users/:username/repos
-# user_repos = Octokit.repositories name
+user_repos = Octokit.repositories name
+total_commits = 0
 
-commit_activity = Octokit.commit_activity_stats()
+user_repos.each do |i|
+  commit_activity = Octokit.participation_stats(name+"/"+user_repos[1].name)
+  total_commits += commit_activity[:owner].inject(0){|total,week| total+week}
+  binding.pry
+end
 
-# GET /repos/:owner/:repo/contributors
+puts "Number of commits for all repos in the last year for #{name} = #{total_commits}"
 
-
+# # puts "average number of commits per repo #{total_commits/}"
 
 # stargazers_count = 0
 # forks_count_count = 0
@@ -31,6 +36,8 @@ commit_activity = Octokit.commit_activity_stats()
 # user_repos.each do |i|
 #   recent_repos << i[:name] if (i[:updated_at].to_date > (Date.today - 50))
 # end
+
+
 
 # user_repos.each do |i|
 #   user_languages << i [:language] if i [:language]
@@ -51,6 +58,22 @@ commit_activity = Octokit.commit_activity_stats()
 
 # recent_repos.each do |i|
 #   puts "Popular repos for #{name} #{i}"
+# end
+
+
+
+
+
+
+
+
+
+#languages 
+# user_languages = Octokit.languages (name+"/"+user_repos[1].name)
+
+# user_repos.each do |i|
+# user_languages_with_bytes = Octokit.languages (name+"/"+ i.name)
+# user_languages << user_languages_with_bytes
 # end
 
 
