@@ -96,5 +96,18 @@ get '/id' do
 end
 
 get '/group' do
-  erb :'group/index'
+  erb :'group/new'
+end
+
+post '/group' do
+  name = params[:name]
+  username = params[:username]
+
+  group = Group.find_by(name: name)
+    if group
+      redirect '/group/'
+    else
+      group = Group.create(name: name)
+      redirect '/group'
+    end
 end

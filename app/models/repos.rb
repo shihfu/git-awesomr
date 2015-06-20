@@ -1,3 +1,3 @@
-class Repos < ActiveRecord::Base
+class Repo < ActiveRecord::Base
   belongs_to :user
 end
