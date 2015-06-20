@@ -8,6 +8,10 @@
 <%follow_ach_url_2 = achievements[1][:url] if achievements[1]%>
 <%follow_ach_url_3 = achievements[2][:url] if achievements[2]%>
 
+<%followers_criteria = 0%>
+<%followers_criteria = achievement_name[2][:criteria]%>
+<%progress_bar = followers/followers_criteria.to_f*100 %>
+
 <%if achievements[0]%>
 <img src="/images/outline_earth.png" alt="Lvl. 1" class="img-achievement-1">
 <%end%>
@@ -22,7 +26,7 @@
 
 <br>You have <%=@user.followers%> followers<br>
 <div class="progress">
-<div class="progress-bar" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width: 100%;">
-    100%
+<div class="progress-bar" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width: <%=progress_bar%>%;">
+  <%=progress_bar.to_i%>%
   </div>
 </div>
