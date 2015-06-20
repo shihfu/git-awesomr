@@ -1,6 +1,7 @@
 class CreateRepos < ActiveRecord::Migration
   def change
     create_table :repos do |t|
+      t.references :user
       t.string :name
       t.integer :stars_count
       t.integer :forks_count
