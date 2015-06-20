@@ -74,19 +74,16 @@ get '/callback' do
     # )
     # total_commits = 0
   end
-end
 
   session[:user_id] = user.id
   
   redirect '/user/login'
-
 end
 
 get '/logout' do
   session.clear
   redirect '/'
 end
-
 
 get '/user' do
   erb :'user/index'
@@ -113,3 +110,13 @@ end
 #       redirect '/group/:id'
 #     end
 # end
+
+get '/group' do
+  # GRAPH DATA
+  @achievement = {}
+  @achievement[:user] = [1, 2, 3, 2, 2, 2, 3]
+  @achievement[:group] = [2, 1, 2, 3, 2, 3, 1]
+
+  erb :'group/index'
+end
+

@@ -1,3 +1,48 @@
+<script>
+  $(document).ready(function() {
+  // See: http://docs.jquery.com/Tutorials:Introducing_$(document).ready()
+  var user = <%= @achievement[:user] %>;
+  var group = <%= @achievement[:group] %>;
+
+  
+  var data = {
+    labels: ["Open", "Languages", "Followers", "Active Streak", "Respositories", "Commits", "Stars"],
+    datasets: [
+      {
+          label: "User",
+          fillColor: "rgba(249,213,139,0.1)",
+          strokeColor: "#F6bb42",
+          pointColor: "#FFCE54",
+          pointStrokeColor: "#fff",
+          pointHighlightFill: "#fff",
+          pointHighlightStroke: "rgba(220,220,220,1)",
+          // data: [3, 3, 1, 3, 2, 3, 2]
+          data: user
+      },
+      {
+          label: "Group",
+          fillColor: "rgba(204,204,204,0.2)",
+          strokeColor: "white",
+          pointColor: "rgba(220,220,220,1)",
+          pointStrokeColor: "#fff",
+          pointHighlightFill: "#fff",
+          pointHighlightStroke: "rgba(151,187,205,1)",
+          // data: [2.7, 2.1, 2.6, 1.8, 2.2, 2.3, 1.8]
+          data: group
+      }
+    ]
+  };
+
+  // Get context with jQuery - using jQuery's .get() method.
+  var ctx = $("#achievements").get(0).getContext("2d");
+  // This will get the first returned node in the jQuery collection.
+  // var myNewChart = new Chart(ctx);
+
+  var myLineChart = new Chart(ctx).Line(data);
+});
+</script>
+
+
 <h2>Lighthouse Labs ('/group/:id')</h2>
 <hr>
 <div class="row">
@@ -53,6 +98,7 @@
         <td>Jeff</td> <!-- %= @user.first_name % -->
         <td>Shih</td> <!-- %= @user.last_name % -->
         <td>
+          <img src="/images/flat_open.png" alt="Lvl. 3" class="img-achievement-3">
           <img src="/images/flat_languages.png" alt="Lvl. 3" class="img-achievement-3">
           <img src="/images/outline_earth.png" alt="Lvl. 1" class="img-achievement-1">
           <img src="/images/flat_motherboard.png" alt="Lvl. 3" class="img-achievement-3">
@@ -69,6 +115,7 @@
         <td>Philemon</td>
         <td>Selvaraj</td>
         <td>
+          <img src="/images/solid_open.png" alt="Lvl. 3" class="img-achievement-2">
           <img src="/images/flat_languages.png" alt="Lvl. 3" class="img-achievement-3">
           <img src="/images/flat_earth.png" alt="Lvl. 3" class="img-achievement-3">
           <img src="/images/solid_motherboard.png" alt="Lvl. 2" class="img-achievement-2">
@@ -85,6 +132,7 @@
         <td>Beth</td>
         <td>Hammett</td>
         <td>
+          <img src="/images/flat_open.png" alt="Lvl. 3" class="img-achievement-3">
           <img src="/images/outline_languages.png" alt="Lvl. 1" class="img-achievement-1">
           <img src="/images/solid_earth.png" alt="Lvl. 2" class="img-achievement-2">
           <img src="/images/flat_motherboard.png" alt="Lvl. 3" class="img-achievement-3">
@@ -98,7 +146,34 @@
   </div>
 
   <div class="col-md-10">
-  <h2>Statistics (Graphs & Charts)</h2>
-  <p>- INSERT HERE -</p>
+  
+    <h2>Statistics (Graphs & Charts)</h2>
+    <h4>Achievement level</h4>
+    <canvas id="achievements" width="640" height="240"></canvas>
+
+
+
+
+
+
+
   </div>
 </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
