@@ -27,7 +27,7 @@
     <% @user.repos.each do |repo| %>
       <% lang_all << repo.language if repo.language !="nil" %>
     <% end %>
-    
+     <% lang_all.compact! %>
     <% lang_all.uniq! %>
     <% lang_all.each do |lang| %>
       <%= lang %><br>
@@ -53,52 +53,21 @@
     <%= erb :"user/_followers.html"%>
 
 
-    <!-- ACTIVE STREAK ACHIEVEMENT -->
-    <%= erb :"user/_forks.html"%>
-    <img src="/images/outline_motherboard.png" alt="Lvl. 1" class="img-achievement-1">
-    <img src="/images/solid_motherboard.png" alt="Lvl. 2" class="img-achievement-2">
-    <img src="/images/flat_motherboard.png" alt="Lvl. 3" class="img-achievement-3">
-    <br>Have an active streak longer than 10 days<br>
-    <div class="progress">
-      <div class="progress-bar" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width: 100%;">
-        100%
-      </div>
-    </div>
-
     <!-- REPOSITORIES ACHIEVEMENT -->
-    <img src="/images/outline_documents.png" alt="Lvl. 1" class="img-achievement-1">
-    <img src="/images/solid_documents.png" alt="Lvl. 2" class="img-achievement-2">
-    <img src="/images/flat_documents.png" alt="Lvl. 3" class="img-achievement-3">
-    <br>Have more than 10 respositories<br>
-    <div class="progress">
-      <div class="progress-bar" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width: 100%;">
-        100%
-      </div>
-    </div>
+    <%= erb :"user/_repositories.html"%>
+  
+    <!-- FORKS ACHIEVEMENT -->
+    <%= erb :"user/_forks.html"%>
+   
 
     <!-- COMMITS ACHIEVEMENT -->
-    <img src="/images/outline_seat_belt.png" alt="Lvl. 1" class="img-achievement-1">
-    <img src="/images/solid_seat_belt.png" alt="Lvl. 2" class="img-achievement-2">
-    <img src="/images/flat_seat_belt.png" alt="Lvl. 3" class="img-achievement-3">
-    <br>Have more than 50 average commits per week<br>
-    <div class="progress">
-      <div class="progress-bar" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width: 100%;">
-        100%
-      </div>
-    </div>
+    <%= erb :"user/_commits.html"%>
+  
 
     <!-- STARS ACHIEVEMENT -->
-    <img src="/images/outline_wizard.png" alt="Lvl." class="img-achievement-1">
-    <img src="/images/solid_wizard.png" alt="Lvl." class="img-achievement-2">
-    <img src="/images/flat_wizard.png" alt="Lvl." class="img-achievement-3">
-    <br>Have more than 10 total stars<br>
-    <div class="progress">
-      <div class="progress-bar" role="progressbar" aria-valuenow="50" aria-valuemin="0" aria-valuemax="50" style="width: 100%;">
-        100%
-      </div>
-    </div>
-  </div>
+    <%= erb :"user/_stars.html"%>  
 
+    </div>
   <div class="col-md-5">
   <h2>Popular Repositories: </h2>
   </div>

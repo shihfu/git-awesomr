@@ -1,0 +1,32 @@
+
+
+<%respositories = @user.public_repos%>
+<%achievement_name = @achievement.where name: "Repos"%>
+<%achievements = []%>
+<%achievements = achievement_name.select {|a| a.criteria <= respositories}%>
+<%repos_ach_url_1 = achievements[0][:url] if achievements[0]%>
+<%repos_ach_url_2 = achievements[1][:url] if achievements[1]%>
+<%repos_ach_url_3 = achievements[2][:url] if achievements[2]%>
+
+<%repos_criteria = 0%>
+<%repos_criteria = achievement_name[2][:criteria]%>
+<%progress_bar = respositories/repos_criteria.to_f*100 %>
+
+<%if achievements[0]%>
+<img src="/images/outline_documents.png" alt="Lvl. 1" class="img-achievement-1">
+<%end%>
+
+<%if achievements[1]%>
+<img src="/images/solid_documents.png" alt="Lvl. 2" class="img-achievement-2">
+<%end%>
+
+<%if achievements[2]%>
+<img src="/images/flat_documents.png" alt="Lvl. 3" class="img-achievement-3">
+<%end%>
+
+<br>You have <%=respositories%> repositories.<br>
+<div class="progress">
+<div class="progress-bar" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width: <%=progress_bar%>%;">
+  <%=progress_bar.to_i%>%
+</div>
+</div>

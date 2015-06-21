@@ -1,0 +1,36 @@
+
+<% stars_all = 0%>
+<% @user.repos.each do |repo| %>
+<% stars_all += repo.stars_count %>
+<% end %>
+
+<%achievement_name = @achievement.where name: "Stars"%>
+<%achievements = []%>
+<%achievements = achievement_name.select {|a| a.criteria <= stars_all}%>
+<%stars_ach_url_1 = achievements[0][:url] if achievements[0]%>
+<%stars_ach_url_2 = achievements[1][:url] if achievements[1]%>
+<%stars_ach_url_3 = achievements[2][:url] if achievements[2]%>
+
+<%stars_criteria = 0%>
+<%stars_criteria = achievement_name[2][:criteria]%>
+
+<%progress_bar = stars_all/stars_criteria.to_f*100 %>
+
+
+<%if achievements[0]%>
+<img src="/images/outline_wizard.png" alt="Lvl. 1" class="img-achievement-1">
+<%end%>
+
+<%if achievements[1]%>
+<img src="/images/solid_wizard.png" alt="Lvl. 2" class="img-achievement-2">
+<%end%>
+
+<%if achievements[2]%>
+<img src="/images/flat_wizard.png" alt="Lvl. 3" class="img-achievement-3">
+<%end%>
+<br>You have <%= stars_all %> total stars<br>
+<div class="progress">
+  <div class="progress-bar" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width: <%=progress_bar%>%;">
+   <%=progress_bar.to_i%>%
+ </div>
+</div>
