@@ -1,19 +1,20 @@
 <% if @open_ach_url_1 %>
   <img src="/images/outline_open.png" alt="Lvl. 1" class="img-achievement-1">
+  <% unless @open_ach_url_2 %>
+    <br>Your Github account has been active for <%= @days_open %> days, you need 1 year to unlock level 2.
+  <% end %>
 <% end %>
 
 <% if @open_ach_url_2 %>
   <img src="/images/solid_open.png" alt="Lvl. 2" class="img-achievement-2">
+  <% unless @open_ach_url_3 %>
+    <br>Your Github account has been active for over <%= @years_open.to_i %> year(s), you need 3 years to unlock level 3.
+  <% end %>
 <% end %>
 
 <% if @open_ach_url_3 %>
   <img src="/images/flat_open.png" alt="Lvl. 3" class="img-achievement-3">
-<% end %>
-
-<% if @days_open > 365 %>
-  <br>Your Github account has been active for over <%= @years_open.to_i %> year(s)<br>
-<% else %>
-  <br>Your Github account has been active for <%= @days_open %> days<br>
+  <br>Your Github account has been active for over <%= @years_open.to_i %> years
 <% end %>
 
 <div class="progress">
