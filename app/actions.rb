@@ -8,8 +8,10 @@ CLIENT_SECRET = '2f6d93489179df343c2fc243d0a1aafd471d556e'
 
 use Rack::Session::Cookie, :secret => rand.to_s()
 
-def current_user
-  User.find(session[:user_id]) if session[:user_id]
+helpers do
+  def current_user
+    @current_user = User.find(session[:user_id]) 
+  end
 end
 
 def achievements
@@ -281,6 +283,7 @@ get '/user/:username' do
   @score = (@total_flags/21.to_f*100).to_i
   @user.update score: @score
   @user.update acct_age_level: @acct_age_level, languages_level: @languages_level, followers_level: @followers_level, repos_level: @repos_level, forks_level: @forks_level, commits_level: @commits_level, stars_level: @stars_level
+  session[:user_id] = @user.id
   erb :'user/index'
 end
 
@@ -338,7 +341,7 @@ get '/callback' do
       public_gists: data.public_gists,
       start_date: data.created_at
     )
-    membership = Membership.create(user_id: user.id, group_id: 1)
+    membership = Membership.create(user_id: user.id, group_id: Group.first.id)
 
     user_repos.each do |repo|
       commit_activity = Octokit.participation_stats(data.login+"/"+repo.name)
@@ -355,7 +358,6 @@ get '/callback' do
       total_commits = 0
     end
  end
-
   session[:user_id] = user.id
 
   redirect "/user/#{user.username}"
@@ -392,10 +394,16 @@ end
 #     end
 # end
 
-get '/group' do
+
+
+
+get '/group/#{@group.name}' do
   # GRAPH DATA
+  @user = User.first
+
+  # binding.pry
   @achievement = {}
-  @achievement[:user] = [1, 2, 3, 2, 2, 2, 3]
+  @achievement[:user] = [@user.acct_age_level, @user.languages_level, @user.followers_level, @user.repos_level, @user.forks_level, @user.commits_level, @user.stars_level]
   @achievement[:group] = [2, 1, 2, 3, 2, 3, 1]
 
 
