@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150621053226) do
+ActiveRecord::Schema.define(version: 20150621152441) do
 
   create_table "achievements", force: :cascade do |t|
     t.string   "name"
@@ -22,13 +22,13 @@ ActiveRecord::Schema.define(version: 20150621053226) do
     t.datetime "updated_at", null: false
   end
 
-  create_table "group", force: :cascade do |t|
+  create_table "groups", force: :cascade do |t|
     t.string   "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
 
-  create_table "membership", force: :cascade do |t|
+  create_table "memberships", force: :cascade do |t|
     t.integer  "user_id"
     t.integer  "group_id"
     t.datetime "created_at", null: false
@@ -57,10 +57,17 @@ ActiveRecord::Schema.define(version: 20150621053226) do
     t.integer  "public_repos"
     t.integer  "public_gists"
     t.date     "start_date"
-    t.datetime "created_at",   null: false
-    t.datetime "updated_at",   null: false
+    t.datetime "created_at",      null: false
+    t.datetime "updated_at",      null: false
     t.integer  "flags"
     t.integer  "score"
+    t.integer  "acct_age_level"
+    t.integer  "languages_level"
+    t.integer  "followers_level"
+    t.integer  "repos_level"
+    t.integer  "forks_level"
+    t.integer  "commits_level"
+    t.integer  "stars_level"
   end
 
 end

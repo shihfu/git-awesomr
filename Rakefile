@@ -42,6 +42,11 @@ task "db:populate" do
   Achievement.create(name: "Stars", level: 3 , url: "/images/flat_wizard.png", criteria: 5)
 end
 
+desc "populate the groups table"
+task "db:populate_group" do
+  Group.destroy_all
+  Group.create(name: "Lighthouse Labs")
+end
 
 task 'db:create_migration' do
   unless ENV["NAME"]
