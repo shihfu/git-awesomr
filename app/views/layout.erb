@@ -25,9 +25,9 @@
     <nav class="navbar navbar-inverse navbar-fixed-top">
       <div class="container">
         <div class="navbar-header">
-            <a class="navbar-brand" href="/"><span style="font-size: 24px; color:white">Git <span style="color:#FFCE54">Awesomr </span><% if @user %>| <% end%></span></a>      
-            <a class="navbar-brand" href="/user"><span style="font-size: 18px; color:white">Profile</span></a>
-            <a class="navbar-brand" href="/group"><span style="font-size: 18px; color:white">Group</span></a>
+            <a class="navbar-brand" href="/login"><span style="font-size: 24px; color:white">Git <span style="color:#FFCE54">Awesomr </span><% if @user %>| <% end%></span></a>      
+            <a class="navbar-brand" href="/login"><span style="font-size: 18px; color:white">Profile</span></a>
+            <a class="navbar-brand" href="/group?id=<%=@user.id%>"><span style="font-size: 18px; color:white">Group</span></a>
         </div>
         <div id="navbar">
           <form class="navbar-form navbar-right">
