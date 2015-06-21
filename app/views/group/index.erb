@@ -7,7 +7,7 @@
 
   // ACHIVEMENTS GRAPH
   var data = {
-    labels: ["Acc. Age", "Languages", "Followers", "Active Streak", "Respositories", "Commits", "Stars"],
+    labels: ["Acc. Age", "Languages", "Followers", "Repositories","Forks", "Commits", "Stars"],
     datasets: [
       {
           label: "User",
@@ -89,7 +89,7 @@
     <br>
 
     <h4>Average Score: </h4>
-    <span class=".score">42</span>
+    <span class=".score"><%=User.all.inject(0) {|total, user| total + user.score}/User.all.count%></span>
     <h4>Members: </h4>
 
     <a href=""><img src="/images/jeff.jpeg" alt="..." class="img-rounded-sm"></a>
@@ -128,57 +128,49 @@
         <th>Achievements</th>
         <th>Score</th>
       </tr>
-
+      
+      <%User.all.each do|user|%>
+      <%i=0%>
       <tr>
-        <td>1</td>
-        <td>someonetookit</td> <!-- %= @user.username % -->
-        <td>Jeff</td> <!-- %= @user.first_name % -->
-        <td>Shih</td> <!-- %= @user.last_name % -->
+        <td></td>
+        <td><%= user.username%></td> <!-- %= @user.username % -->
+        <td><%= user.first_name%></td> <!-- %= @user.first_name % -->
+        <td><%= user.last_name%></td> <!-- %= @user.last_name % -->
         <td>
-          <img src="/images/flat_open.png" alt="Lvl. 3" class="img-achievement-3">
-          <img src="/images/flat_languages.png" alt="Lvl. 3" class="img-achievement-3">
-          <img src="/images/outline_earth.png" alt="Lvl. 1" class="img-achievement-1">
-          <img src="/images/flat_fork.png" alt="Lvl. 3" class="img-achievement-3">
-          <img src="/images/solid_documents.png" alt="Lvl. 2" class="img-achievement-2">
-          <img src="/images/flat_seat_belt.png" alt="Lvl. 3" class="img-achievement-3">
-          <img src="/images/solid_wizard.png" alt="Lvl. 2" class="img-achievement-2">
-        </td>
-        <td>X</td>
-      </tr>
 
-      <tr>
-        <td>2</td>
-        <td>philemonlloyds</td>
-        <td>Philemon</td>
-        <td>Selvaraj</td>
-        <td>
-          <img src="/images/solid_open.png" alt="Lvl. 3" class="img-achievement-2">
-          <img src="/images/flat_languages.png" alt="Lvl. 3" class="img-achievement-3">
-          <img src="/images/flat_earth.png" alt="Lvl. 3" class="img-achievement-3">
-          <img src="/images/solid_fork.png" alt="Lvl. 2" class="img-achievement-2">
-          <img src="/images/flat_documents.png" alt="Lvl. 3" class="img-achievement-3">
-          <img src="/images/flat_seat_belt.png" alt="Lvl. 3" class="img-achievement-3">
-          <img src="/images/flat_wizard.png" alt="Lvl. 3" class="img-achievement-3">
-        </td>
-        <td>X</td>
-      </tr>
+        <%if user.acct_age_level !=0%>
+          <img src=<%=Achievement.where(name: "Account Open",level: user.acct_age_level)[i][:url]%> alt="Lvl. 3" class="img-achievement-3">
+        <%end%>
 
-      <tr>
-        <td>3</td>
-        <td>bhammett</td>
-        <td>Beth</td>
-        <td>Hammett</td>
-        <td>
-          <img src="/images/flat_open.png" alt="Lvl. 3" class="img-achievement-3">
-          <img src="/images/outline_languages.png" alt="Lvl. 1" class="img-achievement-1">
-          <img src="/images/solid_earth.png" alt="Lvl. 2" class="img-achievement-2">
-          <img src="/images/flat_fork.png" alt="Lvl. 3" class="img-achievement-3">
-          <img src="/images/flat_documents.png" alt="Lvl. 3" class="img-achievement-3">
-          <img src="/images/solid_seat_belt.png" alt="Lvl. 2" class="img-achievement-2">
-          <img src="/images/flat_wizard.png" alt="Lvl. 3" class="img-achievement-3">
+        <%if user.languages_level !=0%>
+          <img src=<%=Achievement.where(name: "Language",level: user.languages_level)[i][:url]%> alt="Lvl. 3" class="img-achievement-3">
+        <%end%>
+
+        <%if user.followers_level !=0%>
+          <img src=<%=Achievement.where(name: "Followers",level: user.followers_level)[i][:url]%> class="img-achievement-1">
+        <%end%>
+
+        <%if user.forks_level !=0%>
+          <img src=<%=Achievement.where(name: "Forks",level: user.forks_level)[i][:url]%> alt="Lvl. 3" class="img-achievement-3">
+        <%end%>
+
+        <%if user.repos_level !=0%>
+          <img src=<%=Achievement.where(name: "Repos",level: user.repos_level)[i][:url]%> alt="Lvl. 2" class="img-achievement-2">
+          <%end%>
+
+        <%if user.commits_level !=0%>
+          <img src=<%=Achievement.where(name: "Commits",level: user.commits_level)[i][:url]%> alt="Lvl. 3" class="img-achievement-3">
+          <%end%>
+
+          <%if user.stars_level !=0%>
+          <img src=<%=Achievement.where(name: "Stars",level: user.stars_level)[i][:url]%> alt="Lvl. 2" class="img-achievement-2">
+          <%end%>
+
         </td>
-        <td>X</td>
+        <td><%=user.score%></td>
       </tr>
+      <%i+=1%>
+      <%end%>
     </table>
   </div>
 

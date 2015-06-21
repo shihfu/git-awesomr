@@ -28,13 +28,6 @@ ActiveRecord::Schema.define(version: 20150621152441) do
     t.datetime "updated_at", null: false
   end
 
-  create_table "memberships", force: :cascade do |t|
-    t.integer  "user_id"
-    t.integer  "group_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
   create_table "repos", force: :cascade do |t|
     t.integer  "user_id"
     t.string   "name"
@@ -47,6 +40,7 @@ ActiveRecord::Schema.define(version: 20150621152441) do
   end
 
   create_table "users", force: :cascade do |t|
+    t.integer  "group_id"
     t.string   "username"
     t.string   "first_name"
     t.string   "last_name"

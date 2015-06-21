@@ -338,7 +338,6 @@ get '/callback' do
       public_gists: data.public_gists,
       start_date: data.created_at
     )
-    membership = Membership.create(user_id: user.id, group_id: Group.first.id)
 
     user_repos.each do |repo|
       commit_activity = Octokit.participation_stats(data.login+"/"+repo.name)
@@ -395,11 +394,24 @@ get '/group' do
   # GRAPH DATA
   @user_id = params["id"]
   @user = User.find(@user_id)
-  @group_users = Membership.find_by(:group_id 1)
+  @users_group = User.all
+  
   
   @achievement = {}
   @achievement[:user] = [@user.acct_age_level, @user.languages_level, @user.followers_level, @user.repos_level, @user.forks_level, @user.commits_level, @user.stars_level]
-  @achievement[:group] = [2, 1, 2, 3, 2, 3, 1]
+
+  group_avg_open = (User.all.inject(0) {|total, user| total + user.acct_age_level}/User.count).to_f
+  group_avg_lang = (User.all.inject(0) {|total, user| total + user.languages_level}/User.count).to_f
+  group_avg_followers = (User.all.inject(0) {|total, user| total + user.followers_level}/User.count).to_f
+  group_avg_repos = (User.all.inject(0) {|total, user| total + user.repos_level}/User.count).to_f
+  group_avg_forks = (User.all.inject(0) {|total, user| total + user.forks_level}/User.count).to_f
+  group_avg_commits = (User.all.inject(0) {|total, user| total + user.commits_level}/User.all.count).to_f
+  group_avg_stars = (User.all.inject(0) {|total, user| total + user.stars_level}/User.all.count).to_f
+
+  binding.pry
+
+  # @achievement[:group] = [group_avg_open, group_avg_lang, group_avg_followers, group_avg_repos, group_avg_forks, group_avg_commits, group_avg_stars]
+  @achievement[:group] = [1, 2, 3, 2, 2, 2, 3]
 
 
   @average_score = {}
