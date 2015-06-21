@@ -356,7 +356,6 @@ get '/callback' do
  end
 
   session[:user_id] = user.id
-
   redirect "/user/#{user.username}"
 end
 
@@ -393,13 +392,46 @@ end
 
 get '/group' do
   # GRAPH DATA
+  @user_id = params["id"]
+  @user = User.find(@user_id)
+  @users_group = User.all
+  
+  
   @achievement = {}
-  @achievement[:user] = [1, 2, 3, 2, 2, 2, 3]
-  @achievement[:group] = [2, 1, 2, 3, 2, 3, 1]
+  @achievement[:user] = [@user.acct_age_level, @user.languages_level, @user.followers_level, @user.repos_level, @user.forks_level, @user.commits_level, @user.stars_level]
 
+  group_avg_open = User.all.inject(0) {|total, user| total + user.acct_age_level}/User.count.to_f
+  group_avg_lang = User.all.inject(0) {|total, user| total + user.languages_level}/User.count.to_f
+  group_avg_followers = User.all.inject(0) {|total, user| total + user.followers_level}/User.count.to_f
+  group_avg_repos = User.all.inject(0) {|total, user| total + user.repos_level}/User.count.to_f
+  group_avg_forks = User.all.inject(0) {|total, user| total + user.forks_level}/User.count.to_f
+  group_avg_commits = User.all.inject(0) {|total, user| total + user.commits_level}/User.all.count.to_f
+  group_avg_stars = User.all.inject(0) {|total, user| total + user.stars_level}/User.all.count.to_f
+
+  # binding.pry
+
+  @achievement[:group] = [group_avg_open, group_avg_lang, group_avg_followers, group_avg_repos, group_avg_forks, group_avg_commits, group_avg_stars]
+  # @achievement[:group] = [1, 2, 3, 2, 2, 2, 3]
+
+  labels = []
+  User.all.each do|user|
+  labels << user.username
+  end
 
   @average_score = {}
-  @average_score[:user] = [10, 20, 30, 20, 20, 20, 30, 30]
-  @average_score[:group] = [20, 20, 20, 20, 20, 20, 20, 20]
+
+  user_score = []
+  User.all.each do |user|
+    user_score << user.score
+  end
+
+  average_score_group = []
+  User.all.each do |user|
+    average_score_group  << average_score = User.all.inject(0) {|total, user| total + user.score}/User.all.count
+  end
+
+  @average_score[:user] = user_score
+  @average_score[:group] = average_score_group
+  @average_score[:user_names] = labels
   erb :'group/index'
 end
