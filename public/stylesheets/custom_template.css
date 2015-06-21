@@ -1,9 +1,9 @@
-/** {
+* {
   border-color: white;
   border-style: dashed;
   border-width: 1px;
 }
-*/
+
 /* Move down content because we have a fixed navbar that is 50px tall */
 body {
   padding-top: 50px;
@@ -131,4 +131,9 @@ canvas{
     right: 0px;
     /*width: 300px;*/
     background-color: #b0e0e6;
+}
+
+a {
+  color: white;
+  text-decoration: none;
 }
