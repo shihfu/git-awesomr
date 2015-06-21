@@ -1,19 +1,19 @@
-<%if @lang_ach_url_1%>
-<img src= <%=@lang_ach_url_1%> alt="Lvl. 2" class="img-achievement-1">
-<%end%>
+<% if @lang_ach_url_1 %>
+  <img src= <%= @lang_ach_url_1 %> alt="Lvl. 2" class="img-achievement-1">
+<% end %>
 
-<%if @lang_ach_url_2%>
-<img src= <%=@lang_ach_url_2%> alt="Lvl. 2" class="img-achievement-2">
-<%end%>
+<% if @lang_ach_url_2 %>
+  <img src= <%= @lang_ach_url_2 %> alt="Lvl. 2" class="img-achievement-2">
+<% end %>
 
-<%if @lang_ach_url_3%>
-<img src= <%=@lang_ach_url_3%> alt="Lvl. 3" class="img-achievement-3">
-<%end%>
+<% if @lang_ach_url_3 %>
+  <img src= <%= @lang_ach_url_3 %> alt="Lvl. 3" class="img-achievement-3">
+<% end %>
 
-<br> You have used <%=@lang_all.count%> languages <br>
+<br>You have used <%= @lang_all.count %> language(s)<br>
+
 <div class="progress">
-<div class="progress-bar" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width: 
-<%=@progress_bar_lang%>%;">
-<%=@progress_bar_lang.to_i%>%
-</div>
+  <div class="progress-bar" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width: <%= if @progress_bar_lang.to_i > 100 then 100 else @progress_bar_lang.to_i end %>%; min-width: 2em;">
+    <%= if @progress_bar_lang.to_i > 100 then 100 else @progress_bar_lang.to_i end %>%
+  </div>
 </div>
