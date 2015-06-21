@@ -14,7 +14,7 @@
     <a href="" class="img-container">
       <img src=<%= @user.avatar_url %> alt=<%= @user.avatar_url %> class="img-rounded-bg">
       <span class="score-bg">
-        <%=(@user.flag/21.to_f*100).to_i if defined?@user.flag?%>
+        <%=(@total_flags/21.to_f*100).to_i %>
       </span>
     </a>
     <br>
@@ -70,6 +70,5 @@
     </div>
   <div class="col-md-5">
   <h2>Popular Repositories: </h2>
-   <%=(@total_flags/21.to_f*100).to_i%>
   </div>
 </div>
