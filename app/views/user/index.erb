@@ -25,7 +25,7 @@
     <h4>Languages: </h4>
     <% lang_all=[] %>
     <% @user.repos.each do |repo| %>
-      <% lang_all << repo.language if repo.language !="nil" %>
+      <% lang_all << repo.language %>
     <% end %>
      <% lang_all.compact! %>
     <% lang_all.uniq! %>

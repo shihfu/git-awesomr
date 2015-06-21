@@ -30,9 +30,10 @@
             <a class="navbar-brand" href="/group"><span style="font-size: 18px; color:white">Group</span></a>
         </div>
         <div id="navbar">
-          <form class="navbar-form navbar-right">
+          <form method="POST" action="/search" class="navbar-form navbar-right">
             <div class="form-group">
-              <input type="text" class="form-control" placeholder="Git Username">
+              <input type="text" class="form-control" name="searchname" placeholder="Git Username">
+              <input type="submit" class="btn btn-default" >
             </div>
             
             <a href="" class="btn btn-default">Search</a>
