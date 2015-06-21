@@ -238,6 +238,10 @@ get '/user/:username' do
   @total_flags = 0 
   @user = current_user
   @achievement = achievements
+  client = Octokit::Client.new :access_token => session[:access_token]
+  data = client.user
+  user = User.find_by(username: data.login)
+  @user_repos = Octokit.repositories data.login
   account_open
   language_achieved
   followers_achieved
