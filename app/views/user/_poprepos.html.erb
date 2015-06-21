@@ -1,10 +1,13 @@
+<% recent_repos =[] %>
 
-<%recent_repos =[]%>
+<% @user_repos.each do |i| %>
+  <% recent_repos << i[:name] if (i[:updated_at].to_date > (Date.today - 50)) %>
+<% end %>
 
-<%@user_repos.each do |i|%>
-  <%recent_repos << i[:name] if (i[:updated_at].to_date > (Date.today - 50))%>
-<%end%>
-
-<%recent_repos.each do |i|%>
-  <%= "https://github.com/#{@user.username}/#{i}"%> <br>
-  <%end%>
+<% recent_repos.each do |i| %>
+  <h4>
+    <a href= <%= "https://github.com/#{@user.username}/#{i}" %>>
+      <%= "#{i}" %><br>
+    </a><br>
+  </h4>
+<% end %>
