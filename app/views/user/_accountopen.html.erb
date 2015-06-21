@@ -10,16 +10,22 @@
 
 <% progress_bar = days_open/1095.to_f*100 %>
 
+<%@total_flags = 0 %>
+
+
 <% if achievements[0] %>
   <img src="/images/outline_open.png" alt="Lvl. 1" class="img-achievement-1">
+  <%@total_flags += 1 %>
 <% end %>
 
 <% if achievements[1] %>
   <img src="/images/solid_open.png" alt="Lvl. 2" class="img-achievement-2">
+  <%@total_flags += 1 %>
 <% end %>
 
 <% if achievements[2] %>
   <img src="/images/flat_open.png" alt="Lvl. 3" class="img-achievement-3">
+  <%@total_flags += 1 %>
 <% end %>
 
 <% if days_open > 365 %>

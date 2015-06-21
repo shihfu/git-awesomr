@@ -26,14 +26,17 @@
 
     <%if lang_ach[0]%>
     <img src= <%=lang_ach_url_1%> alt="Lvl. 2" class="img-achievement-1">
+    <%@total_flags += 1 %>
     <%end%>
 
     <%if lang_ach[1]%>
     <img src= <%=lang_ach_url_2%> alt="Lvl. 2" class="img-achievement-2">
+    <%@total_flags += 1 %>
     <%end%>
 
     <%if lang_ach[3]%>
     <img src= <%=lang_ach_url_3%> alt="Lvl. 3" class="img-achievement-3">
+    <%@total_flags += 1 %>
     <%end%>
 
     <br> You have used <%=lang_all.count%> languages <br>

@@ -14,14 +14,17 @@
 
 <%if achievements[0]%>
 <img src="/images/outline_earth.png" alt="Lvl. 1" class="img-achievement-1">
+<%@total_flags += 1 %>
 <%end%>
 
 <%if achievements[1]%>
 <img src="/images/solid_earth.png" alt="Lvl. 2" class="img-achievement-2">
+<%@total_flags += 1 %>
 <%end%>
 
 <%if achievements[2]%>
 <img src="/images/flat_earth.png" alt="Lvl. 3" class="img-achievement-3">
+<%@total_flags += 1 %>
 <%end%>
 
 <br>You have <%=@user.followers%> followers<br>
