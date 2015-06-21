@@ -1,0 +1,9 @@
+<h2>Hello, 
+  <% if @user %>
+    <%= @user.name %>
+  <% else %>
+    <span style="color: red">Not logged in</span>
+  <% end %>
+
+</h2>
+

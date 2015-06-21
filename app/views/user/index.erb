@@ -14,7 +14,7 @@
     <a href="" class="img-container">
       <img src=<%= @user.avatar_url %> alt=<%= @user.avatar_url %> class="img-rounded-bg">
       <span class="score-bg">
-        <%= @user.score %>
+        <%= (@total_flags/21.to_f*100).to_i%>
       </span>
     </a>
     <br>
@@ -34,7 +34,7 @@
     <% end %>
 
     <h4>Member of: </h4>
-    <a href="/group"><img src="/images/lighthouse.png" alt="..." class="img-rounded-sm"></a>
+    <a href="/#{user.username}"><img src="/images/lighthouse.png" alt="..." class="img-rounded-sm"></a>
   </div>
   
   <div class="col-md-5">
@@ -61,8 +61,10 @@
     <%= erb :"user/_stars.html"%>  
   </div>
 
+<% if @days_open%>
   <div class="col-md-5">
-    <h2>Popular Repositories: </h2>
+    <h2>Popular Repositories: </h2>    
     <%= erb :"user/_poprepos.html" %>  
   </div>
 </div>
+<%end%>

@@ -10,7 +10,9 @@
 <img src= <%=@lang_ach_url_3%> alt="Lvl. 3" class="img-achievement-3">
 <%end%>
 
+<%if @lang_all%>
 <br> You have used <%=@lang_all.count%> languages <br>
+<%end%>
 <div class="progress">
 <div class="progress-bar" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width: 
 <%=@progress_bar_lang%>%;">
