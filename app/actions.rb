@@ -338,7 +338,6 @@ get '/callback' do
       public_gists: data.public_gists,
       start_date: data.created_at
     )
-    membership = Membership.create(user_id: user.id, group_id: 1)
 
     user_repos.each do |repo|
       commit_activity = Octokit.participation_stats(data.login+"/"+repo.name)
