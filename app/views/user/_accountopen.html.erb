@@ -1,4 +1,3 @@
-
 <% if @open_ach_url_1 %>
   <img src="/images/outline_open.png" alt="Lvl. 1" class="img-achievement-1">
 <% end %>
@@ -12,13 +11,13 @@
 <% end %>
 
 <% if @days_open > 365 %>
-  <br>Your Github account has been active for over <%=@years_open.to_i%> years<br>
+  <br>Your Github account has been active for over <%= @years_open.to_i %> year(s)<br>
 <% else %>
-  <br>Your Github account has been active for <%=@days_open%> days<br>
+  <br>Your Github account has been active for <%= @days_open %> days<br>
 <% end %>
 
 <div class="progress">
-  <div class="progress-bar" role="progressbar" aria-valuenow="<%= @progress_bar_acc_open.to_i %>" aria-valuemin="0" aria-valuemax="100" style="width: <%= @progress_bar_acc_open.to_i %>%;">
-    <%=@progress_bar_acc_open.to_i%>%
+  <div class="progress-bar" role="progressbar" aria-valuenow="<%= @progress_bar_acc_open.to_i %>" aria-valuemin="0" aria-valuemax="100" style="width: <%= if @progress_bar_acc_open.to_i > 100 then 100 else @progress_bar_acc_open.to_i end %>%; min-width: 2em;">
+    <%= if @progress_bar_acc_open.to_i > 100 then 100 else @progress_bar_acc_open.to_i end %>%
   </div>
 </div>
