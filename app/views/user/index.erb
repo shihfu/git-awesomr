@@ -14,7 +14,7 @@
     <a href="" class="img-container">
       <img src=<%= @user.avatar_url %> alt=<%= @user.avatar_url %> class="img-rounded-bg">
       <span class="score-bg">
-        <%# <%=@total_flags/21%>
+        <%=(@user.flag/21.to_f*100).to_i if defined?@user.flag?%>
       </span>
     </a>
     <br>
