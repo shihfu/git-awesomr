@@ -14,7 +14,7 @@
   <link rel="stylesheet" href="/stylesheets/bootstrap.css">
   <link rel="stylesheet" href="/stylesheets/custom_template.css">
 
-  <!-- JS FILES ARE TPYICALLY PLACED RIGHT BEFORE THE CLOSING BODY TAG SO THE PAGES LOAD FASTER, BUT WE NEED THEM TO LOAD FIRST IN OUR CASE TO DISPLAY CHARTJS -->
+  <!-- JS FILES ARE TPYICALLY PLACED RIGHT BEFORE THE CLOSING BODY TAG TO MAKE PAGES LOAD FASTER, BUT WE NEED THEM TO LOAD FIRST IN OUR CASE TO DISPLAY CHARTJS -->
   <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
   <script src="/javascript/chartjs/Chart.js"></script>
   <script src="/javascript/application.js"></script>
@@ -31,7 +31,12 @@
         </div>
         <div id="navbar">
           <form class="navbar-form navbar-right">
-              <a href="/logout" class="btn btn-default">Sign out</a>
+            <div class="form-group">
+              <input type="text" class="form-control" placeholder="Git Username">
+            </div>
+            
+            <a href="" class="btn btn-default">Search</a>
+            <a href="/logout" class="btn btn-default">Sign out</a>
           </form>
         </div>
       </div>
