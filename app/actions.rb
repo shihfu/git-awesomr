@@ -249,6 +249,9 @@ get '/user/:username' do
   forks_achieved
   commits_achieved
   stars_achieved
+  @user.update flags: @total_flags
+  @score = (@total_flags/21.to_f*100).to_i
+  @user.update score: @score
   erb :'user/index'
 end
 
