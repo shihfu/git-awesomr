@@ -338,7 +338,7 @@ get '/callback' do
       public_gists: data.public_gists,
       start_date: data.created_at
     )
-    membership = Membership.create(user_id: user.id, group_id: 1)
+    membership = Membership.create(user_id: user.id, group_id: Group.first.id)
 
     user_repos.each do |repo|
       commit_activity = Octokit.participation_stats(data.login+"/"+repo.name)
@@ -357,7 +357,6 @@ get '/callback' do
  end
 
   session[:user_id] = user.id
-
   redirect "/user/#{user.username}"
 end
 
@@ -394,8 +393,12 @@ end
 
 get '/group' do
   # GRAPH DATA
+  @user_id = params["id"]
+  @user = User.find(@user_id)
+  @group_users = Membership.find_by(:group_id 1)
+  
   @achievement = {}
-  @achievement[:user] = [1, 2, 3, 2, 2, 2, 3]
+  @achievement[:user] = [@user.acct_age_level, @user.languages_level, @user.followers_level, @user.repos_level, @user.forks_level, @user.commits_level, @user.stars_level]
   @achievement[:group] = [2, 1, 2, 3, 2, 3, 1]
 
 
