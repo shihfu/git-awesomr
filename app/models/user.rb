@@ -1,6 +1,5 @@
 class User < ActiveRecord::Base
-  has_many :memberships
-  has_many :groups, through: :memberships
+  belongs_to :group 
   has_many :repos
 
   validates :username, uniqueness: true
