@@ -42,16 +42,19 @@ def account_open
   if achievements[0] 
     @open_ach_url_1 = achievements[0][:url]
     @total_flags +=1
+    @acct_age_level = 1
   end
 
   if achievements[1] 
     @open_ach_url_2 = achievements[1][:url]
     @total_flags +=1
+    @acct_age_level = 2
   end
 
   if achievements[2] 
     @open_ach_url_3 = achievements[2][:url]
     @total_flags +=1
+     @acct_age_level = 3
   end
 
 end
@@ -72,16 +75,19 @@ def language_achieved
  if achievements[0] 
     @lang_ach_url_1 = achievements[0][:url]if achievements[0]
     @total_flags +=1
+    @languages_level = 1
   end
 
   if achievements[1] 
     @lang_ach_url_2 = achievements[1][:url] if achievements[1]
     @total_flags +=1
+     @languages_level = 2
   end
   
   if achievements[2] 
     @lang_ach_url_3 = achievements[2][:url] if achievements[2]
     @total_flags +=1
+     @languages_level = 3
   end
 
 end
@@ -95,16 +101,19 @@ def followers_achieved
   if achievements[0] 
     @follow_ach_url_1 = achievements[0][:url] if achievements[0]
     @total_flags +=1 
+    @followers_level = 1
   end
 
   if achievements[1] 
     @follow_ach_url_2 = achievements[1][:url] if achievements[1]
     @total_flags +=1
+    @followers_level = 2
   end
 
   if achievements[2] 
     @follow_ach_url_3 = achievements[2][:url] if achievements[2]
     @total_flags +=1
+    @followers_level = 3
   end
 
   followers_criteria = 0
@@ -120,17 +129,20 @@ def repositories_achieved
 
   if achievements[0] 
     @repos_ach_url_1 = achievements[0][:url] if achievements[0]
-     @total_flags +=1 
+    @total_flags +=1
+    @repos_level = 1 
   end
 
   if achievements[1] 
     @repos_ach_url_2 = achievements[1][:url] if achievements[1]
-     @total_flags +=1 
+    @total_flags +=1 
+    @repos_level = 2 
   end
 
   if achievements[2] 
     @repos_ach_url_3 = achievements[2][:url] if achievements[2]
-     @total_flags +=1 
+    @total_flags +=1
+    @repos_level = 3
   end
 
   repos_criteria = 0
@@ -152,16 +164,19 @@ achievements = achievement_name.select {|a| a.criteria <= @forks_all}
 if achievements[0] 
   @forks_ach_url_1 = achievements[0][:url] if achievements[0]
   @total_flags +=1 
+  @forks_level = 1
 end
 
 if achievements[1] 
   @forks_ach_url_2 = achievements[1][:url] if achievements[1]
-   @total_flags +=1 
+   @total_flags +=1
+   @forks_level = 2
 end
 
 if achievements[2] 
   @forks_ach_url_3 = achievements[2][:url] if achievements[2]
   @total_flags +=1 
+  @forks_level = 3
 end
 
 forks_criteria = 0
@@ -184,17 +199,20 @@ def commits_achieved
 
   if achievements[0]
    @commits_ach_url_1 = achievements[0][:url] if achievements[0]
-   @total_flags +=1 
+   @total_flags +=1
+   @commits_level = 1
   end
 
   if achievements[1]
     @commits_ach_url_2 = achievements[1][:url] if achievements[1]
     @total_flags +=1 
+    @commits_level = 2
   end
 
   if achievements[2]
     @commits_ach_url_3 = achievements[2][:url] if achievements[2]
     @total_flags +=1 
+    @commits_level = 3
   end
 
   commits_criteria = 0
@@ -216,16 +234,19 @@ def stars_achieved
   if achievements[0]
     @stars_ach_url_1 = achievements[0][:url] if achievements[0]
     @total_flags +=1 
+    @stars_level = 1
   end
 
   if achievements[1]
     @stars_ach_url_2 = achievements[1][:url] if achievements[1]
     @total_flags +=1 
+    @stars_level = 2
   end
 
   if achievements[2]
     @stars_ach_url_3 = achievements[2][:url] if achievements[2]
     @total_flags +=1 
+    @stars_level = 3
   end
 
   stars_criteria = 0
@@ -236,6 +257,13 @@ end
 
 get '/user/:username' do
   @total_flags = 0 
+  @acct_age_level = 0
+  @languages_level = 0
+  @followers_level = 0
+  @repos_level = 0
+  @forks_level = 0
+  @commits_level = 0
+  @stars_level = 0
   @user = current_user
   @achievement = achievements
   client = Octokit::Client.new :access_token => session[:access_token]
@@ -252,6 +280,7 @@ get '/user/:username' do
   @user.update flags: @total_flags
   @score = (@total_flags/21.to_f*100).to_i
   @user.update score: @score
+  @user.update acct_age_level: @acct_age_level, languages_level: @languages_level, followers_level: @followers_level, repos_level: @repos_level, forks_level: @forks_level, commits_level: @commits_level, stars_level: @stars_level
   erb :'user/index'
 end
 
@@ -309,6 +338,7 @@ get '/callback' do
       public_gists: data.public_gists,
       start_date: data.created_at
     )
+    membership = Membership.create(user_id: user.id, group_id: 1)
 
     user_repos.each do |repo|
       commit_activity = Octokit.participation_stats(data.login+"/"+repo.name)

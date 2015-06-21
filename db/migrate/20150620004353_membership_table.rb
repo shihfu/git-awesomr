@@ -1,6 +1,6 @@
 class MembershipTable < ActiveRecord::Migration
   def change
-     create_table :membership do |t|
+     create_table :memberships do |t|
       t.references :user
       t.references :group
       t.timestamps null: false
