@@ -1,8 +1,8 @@
-* {
+/** {
   border-color: white;
   border-style: dashed;
   border-width: 1px;
-}
+}*/
 
 /* Move down content because we have a fixed navbar that is 50px tall */
 body {
@@ -136,4 +136,10 @@ canvas{
 a {
   color: white;
   text-decoration: none;
+}
+
+a:hover,
+a:focus {
+  color: #F6bb42;
+  text-decoration: underline;
 }
