@@ -1,35 +1,18 @@
-
-
-<%followers = @user.followers%>
-<%achievement_name = @achievement.where name: "Followers"%>
-<%achievements = []%>
-<%achievements = achievement_name.select {|a| a.criteria <= followers}%>
-<%follow_ach_url_1 = achievements[0][:url]%>
-<%follow_ach_url_2 = achievements[1][:url] if achievements[1]%>
-<%follow_ach_url_3 = achievements[2][:url] if achievements[2]%>
-
-<%followers_criteria = 0%>
-<%followers_criteria = achievement_name[2][:criteria]%>
-<%progress_bar = followers/followers_criteria.to_f*100 %>
-
-<%if achievements[0]%>
+<%if @follow_ach_url_1%>
 <img src="/images/outline_earth.png" alt="Lvl. 1" class="img-achievement-1">
-<%@total_flags += 1 %>
 <%end%>
 
-<%if achievements[1]%>
+<%if @follow_ach_url_2%>
 <img src="/images/solid_earth.png" alt="Lvl. 2" class="img-achievement-2">
-<%@total_flags += 1 %>
 <%end%>
 
-<%if achievements[2]%>
+<%if @follow_ach_url_3%>
 <img src="/images/flat_earth.png" alt="Lvl. 3" class="img-achievement-3">
-<%@total_flags += 1 %>
 <%end%>
 
 <br>You have <%=@user.followers%> followers<br>
 <div class="progress">
-<div class="progress-bar" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width: <%=progress_bar%>%;">
-  <%=progress_bar.to_i%>%
+<div class="progress-bar" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width: <%=p@progress_bar_followers%>%;">
+  <%=@progress_bar_followers.to_i%>%
   </div>
 </div>
