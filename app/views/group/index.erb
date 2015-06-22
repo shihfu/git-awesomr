@@ -88,11 +88,12 @@
     <br>
 
     <h4>Average Score: </h4>
-    <span class=".score"><%=User.all.inject(0) {|total, user| total + user.score}/User.all.count%></span>
+    <span class=".score"><%= User.all.inject(0) {|total, user| total + user.score}/User.all.count %></span>
+    
     <h4>Members: </h4>
-    <%User.all.each do|user|%>
-    <a href=""><img src=<%=user.avatar_url%> alt="..." class="img-rounded-sm"></a>
-    <%end%>
+    <% User.all.each do|user| %>
+      <a href=""><img src=<%=user.avatar_url%> alt="..." class="img-rounded-sm"></a> <!-- TO DO: DIRECT LINK TO USER'S PROFILE -->
+    <% end %>
     <br><br><br><br><br>
   
   </div>
@@ -101,7 +102,6 @@
     <h2>Overview </h2>
     <table class="table">
       <tr>
-        <th>#</th>
         <th>Username</th>
         <th>First Name</th>
         <th>Last Name</th>
@@ -112,68 +112,54 @@
       <%User.all.each do|user|%>
       <%i=0%>
       <tr>
-        <td></td>
-        <td><%= user.username%></td> <!-- %= @user.username % -->
-        <td><%= user.first_name%></td> <!-- %= @user.first_name % -->
-        <td><%= user.last_name%></td> <!-- %= @user.last_name % -->
+        <td><%= user.username%></td>
+        <td><%= user.first_name%></td>
+        <td><%= user.last_name%></td>
         <td>
+          <!-- TO DO: DISPLAY CORRECT CSS CLASS AS PER LEVEL -->
+          <%if user.acct_age_level !=0%>
+            <img src=<%=Achievement.where(name: "Account Open",level: user.acct_age_level)[i][:url]%> alt="Lvl. 2" class="img-achievement-2">
+          <%end%>
 
-        <%if user.acct_age_level !=0%>
-          <img src=<%=Achievement.where(name: "Account Open",level: user.acct_age_level)[i][:url]%> alt="Lvl. 3" class="img-achievement-3">
-        <%end%>
+          <%if user.languages_level !=0%>
+            <img src=<%=Achievement.where(name: "Language",level: user.languages_level)[i][:url]%> alt="Lvl. 2" class="img-achievement-2">
+          <%end%>
 
-        <%if user.languages_level !=0%>
-          <img src=<%=Achievement.where(name: "Language",level: user.languages_level)[i][:url]%> alt="Lvl. 3" class="img-achievement-3">
-        <%end%>
+          <%if user.followers_level !=0%>
+            <img src=<%=Achievement.where(name: "Followers",level: user.followers_level)[i][:url]%> alt="Lvl. 2" class="img-achievement-2">
+          <%end%>
 
-        <%if user.followers_level !=0%>
-          <img src=<%=Achievement.where(name: "Followers",level: user.followers_level)[i][:url]%> class="img-achievement-3">
-        <%end%>
+          <%if user.forks_level !=0%>
+            <img src=<%=Achievement.where(name: "Forks",level: user.forks_level)[i][:url]%> alt="Lvl. 2" class="img-achievement-2">
+          <%end%>
 
-        <%if user.forks_level !=0%>
-          <img src=<%=Achievement.where(name: "Forks",level: user.forks_level)[i][:url]%> alt="Lvl. 3" class="img-achievement-3">
-        <%end%>
+          <%if user.repos_level !=0%>
+            <img src=<%=Achievement.where(name: "Repos",level: user.repos_level)[i][:url]%> alt="Lvl. 2" class="img-achievement-2">
+          <%end%>
 
-        <%if user.repos_level !=0%>
-          <img src=<%=Achievement.where(name: "Repos",level: user.repos_level)[i][:url]%> alt="Lvl. 2" class="img-achievement-3">
-        <%end%>
+          <%if user.commits_level !=0%>
+            <img src=<%=Achievement.where(name: "Commits",level: user.commits_level)[i][:url]%> alt="Lvl. 2" class="img-achievement-2">
+          <%end%>
 
-        <%if user.commits_level !=0%>
-          <img src=<%=Achievement.where(name: "Commits",level: user.commits_level)[i][:url]%> alt="Lvl. 3" class="img-achievement-3">
-        <%end%>
-
-        <%if user.stars_level !=0%>
-          <img src=<%=Achievement.where(name: "Stars",level: user.stars_level)[i][:url]%> alt="Lvl. 2" class="img-achievement-3">
-        <%end%>
-
+          <%if user.stars_level !=0%>
+            <img src=<%=Achievement.where(name: "Stars",level: user.stars_level)[i][:url]%> alt="Lvl. 2" class="img-achievement-2">
+          <%end%>
         </td>
-        <td><%=user.score%></td>
+        <td>
+          <%= user.score %>
+        </td>
       </tr>
-      <%i+=1%>
-      <%end%>
+      <% i+=1 %>
+      <% end %>
     </table>
   </div>
 
   <div class="col-md-10">
     <h2>Statistics </h2>
-    
     <h4>Me <span style="color:white">vs Average Achievement Level</span></h4>
     <canvas id="achievements"></canvas>
-
 
     <h4>Members <span style="color:white">vs Average Score</span></h4>
     <canvas id="average_scores"></canvas>
   </div>
-
-<!--   <div class="col-md-5">
-    <h2>Statistics (Graphs & Charts)</h2>
-    <h4>Achievement level</h4>
-    <canvas id="achievements"></canvas>
-  </div>
-
-  <div class="col-md-5">
-    <h2>&nbsp;</h2>
-    <h4>Average Score</h4>
-    <canvas id="average_scores"></canvas>
-  </div> -->
 </div>
