@@ -143,3 +143,15 @@ a:focus {
   color: #F6bb42;
   text-decoration: underline;
 }
+
+.description {
+  width: 840px;
+  font-style: normal;
+}
+
+.offset {
+  /*padding-top: -200px;*/
+  position: relative;
+  margin-top: -0.5em;
+  font-style: italic;
+}
