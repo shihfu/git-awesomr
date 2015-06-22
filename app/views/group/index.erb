@@ -38,16 +38,12 @@
   var myLineChart = new Chart(ctx).Line(data);
 
 
-
-
   // See: http://docs.jquery.com/Tutorials:Introducing_$(document).ready()
   var user_score = <%= @average_score[:user] %>;
   var group_score = <%= @average_score[:group] %>;
-
+  var user_names = <%= @average_score[:user_names]%>;
+  
   // AVERAGE SCORE GRAPH
- 
- var user_names = <%= @average_score[:user_names]%>;
-
   var data = {
     labels: user_names,
     datasets: [
@@ -131,7 +127,7 @@
         <%end%>
 
         <%if user.followers_level !=0%>
-          <img src=<%=Achievement.where(name: "Followers",level: user.followers_level)[i][:url]%> class="img-achievement-1">
+          <img src=<%=Achievement.where(name: "Followers",level: user.followers_level)[i][:url]%> class="img-achievement-3">
         <%end%>
 
         <%if user.forks_level !=0%>
@@ -139,16 +135,16 @@
         <%end%>
 
         <%if user.repos_level !=0%>
-          <img src=<%=Achievement.where(name: "Repos",level: user.repos_level)[i][:url]%> alt="Lvl. 2" class="img-achievement-2">
-          <%end%>
+          <img src=<%=Achievement.where(name: "Repos",level: user.repos_level)[i][:url]%> alt="Lvl. 2" class="img-achievement-3">
+        <%end%>
 
         <%if user.commits_level !=0%>
           <img src=<%=Achievement.where(name: "Commits",level: user.commits_level)[i][:url]%> alt="Lvl. 3" class="img-achievement-3">
-          <%end%>
+        <%end%>
 
-          <%if user.stars_level !=0%>
-          <img src=<%=Achievement.where(name: "Stars",level: user.stars_level)[i][:url]%> alt="Lvl. 2" class="img-achievement-2">
-          <%end%>
+        <%if user.stars_level !=0%>
+          <img src=<%=Achievement.where(name: "Stars",level: user.stars_level)[i][:url]%> alt="Lvl. 2" class="img-achievement-3">
+        <%end%>
 
         </td>
         <td><%=user.score%></td>
@@ -181,23 +177,3 @@
     <canvas id="average_scores"></canvas>
   </div> -->
 </div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
