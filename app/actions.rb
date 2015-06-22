@@ -34,9 +34,9 @@ end
 
 def account_open
   @days_open = (Date.today - @user.start_date).to_i 
-  years_open = @days_open/365.to_f 
+  @years_open = @days_open/365.to_f 
   achievement_name = @achievement.where(name: "Account Open") 
-  achievements = achievement_name.select {|a| a.criteria <= years_open} 
+  achievements = achievement_name.select {|a| a.criteria <= @years_open} 
   @progress_bar_acc_open = @days_open/1095.to_f*100 
 
   if achievements[0] 
@@ -342,7 +342,6 @@ get '/callback' do
     user_repos.each do |repo|
       commit_activity = Octokit.participation_stats(data.login+"/"+repo.name)
       total_commits += commit_activity[:owner].inject(0){|total,week| total+week} if commit_activity
-
       user_achievement_info = Repo.create(
       name: repo.name,
       user_id: user.id,
